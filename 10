@@ -1,0 +1,40 @@
+<?php 
+
+echo "holiiiiiiiiiiiiiiiii contador $ContadorPR";
+
+
+
+	 					for($d=0;$d<$ContadorPR;$d++)
+		    			{
+					    	
+					         echo "<br>comparamos ";
+					          echo $Reservadas[$d];
+					          echo " con ";
+					          echo $tem2;
+					          echo "<br>";
+					            $var1 = TRIM($Reservadas[$d]);
+					            
+					           if (strcasecmp($var1,$tem2) === 0)
+					            {
+					                //$resultado[$au]=$tem2;   
+					                $resultado[$au]='Palabra reservada';
+
+					                     $au++;
+										$au2++;
+									
+										$salir=0;
+										$estadoActual=0;
+										$AlfabetoActual=0;
+										$y=0;
+								
+					            }
+					            else
+					             {echo "<br>guardar aqui--";
+									$opcion=2;
+									include('Retroceso.php');	
+					            }
+        				}
+
+
+
+ ?>
