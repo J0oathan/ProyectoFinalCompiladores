@@ -18,14 +18,14 @@
 							$caracterActual++;//solo para ver si el siguiente caracter no es vacio
 							echo "<br>--";
 							echo $caracteres[$caracterActual];
-							echo "<br>--";
+							echo "--";
 							if($caracterActual==$ContadorCaracteres)
 							 {
 							    echo "<br> acabo limite<br>";
 							    $salir=0;
 							    
 							 }
-							 else if($caracteres[$caracterActual]=='')
+							 else if($caracteres[$caracterActual]==''||$caracteres[$caracterActual]==' ')
 							 {
 							 	$caracterActual++;
 							 	echo "<br> avanza a la siguiente<br>";

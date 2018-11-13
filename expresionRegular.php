@@ -29,12 +29,21 @@ $continua=0;
 //}
 		
 		
-		if(($estadoActual==1)||($estadoActual==5)||($estadoActual==6))
+		if(($estadoActual==5)||($estadoActual==6))
 		{
 			if(($caracteres[$caracterActual]=='l')||($caracteres[$caracterActual]=='d'))
 				{
 					$continua=1;
 					echo "<br>entro en 5<br>";
+				}
+
+		}
+
+		else if($estadoActual==1)
+		{
+			if(($caracteres[$caracterActual]=='l')||($caracteres[$caracterActual]=='d')||($caracteres[$caracterActual]=='_'))
+				{
+					$continua=1;
 				}
 
 		}
@@ -64,11 +73,11 @@ $continua=0;
 
 		}
 
-		else if($estadoActual==17)
+		else if($estadoActual==17||$estadoActual==20)
 		{
 			if($caracteres[$caracterActual]=='=')
 				{
-					echo("CONTINUA HAY UN IGUAL<BR>");
+					
 					$continua=1;
 				}
 
