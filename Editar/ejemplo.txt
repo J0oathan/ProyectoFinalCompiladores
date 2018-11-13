@@ -1,3 +1,2 @@
-HOLA 
-inicio 22 ==
-si(33=20)
++ SI <=
+INICIO22 INICIO 22

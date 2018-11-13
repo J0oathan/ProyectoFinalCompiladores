@@ -16,18 +16,27 @@
 							$salir=0;
 
 							$caracterActual++;//solo para ver si el siguiente caracter no es vacio
-							echo "<br>";
+							echo "<br>--";
 							echo $caracteres[$caracterActual];
-							echo "<br>";
-							if($caracteres[$caracterActual]=='')
+							echo "<br>--";
+							if($caracterActual==$ContadorCaracteres)
 							 {
-							    echo "<br>es vacio<br>";
+							    echo "<br> acabo limite<br>";
 							    $salir=0;
 							    
 							 }
+							 else if($caracteres[$caracterActual]=='')
+							 {
+							 	$caracterActual++;
+							 	echo "<br> avanza a la siguiente<br>";
+							 	$salir=1;
+							 	$estadoActual=0;
+							 	$AlfabetoActual=0;
+							 	$y=0;
+							 } 
 							 else
 							 {
-							 	echo "<br> no es vacio";
+							 	echo "<br> no es vacio..";
 
 							 	$salir=1;
 							 	$estadoActual=0;
@@ -107,29 +116,38 @@
 
 							
 
-							echo "<br>normal: ";
+							echo "<br>normal::";
 							echo $caracteres[$caracterActual];
-							echo "<br>";
+							echo "::<br>";
 							//$caracterActual++;//solo para ver si el siguiente caracter no es vacio
 							//echo "<br> el que sigue: ";
 							//echo $caracteres[$caracterActual];
 							//echo "<br>";
-							if($caracteres[$caracterActual]=='')
+							if($caracterActual==$ContadorCaracteres)
 							 {
-							    echo "<br>es vacio<br>";
+							    echo "<br> acabo limite<br>";
 							    $salir=0;
 							    
 							 }
+							 else if($caracteres[$caracterActual]==' ')
+							 {
+							 	$caracterActual++;
+							 	echo "<br> avanza a la siguiente<br>";
+							 	$salir=1;
+							 	$estadoActual=0;
+							 	$AlfabetoActual=0;
+							 	$y=0;
+							 } 
 							 else
 							 {
-							 	echo "<br> no es vacio";
+							 	echo "<br> no es vacio..";
 
 							 	$salir=1;
-								$estadoActual=0;
-								$AlfabetoActual=0;
-								$y=0;
+							 	$estadoActual=0;
+							 	$AlfabetoActual=0;
 							 	echo "<br> estadoActual $estadoActual salir =$salir<br>";
-							 	
+							 	$y=0;
+							 	echo "<br>";
 							 }
 							 //$caracterActual--;
 							

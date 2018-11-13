@@ -6,26 +6,14 @@
   		while($salir!=0)
     		{		
 
+    			/*if($caracteres[$caracterActual]=='')
+    			{
 
-    				echo "linea numero $linea ";
-    			/*echo "<br>";
-
-            for($aaa=0; $aaa<22; $aaa++)
-          
-            {
-                echo "<br>";
-                for($bbb=0; $bbb<10; $bbb++)
-          
-                {
-                  echo "[$aaa][$bbb]=";
-                  echo $Bidimensional[$aaa][$bbb];
-                  echo "<br>";
-
-                }
-            }  */ 
+    			}*/
+    		
     			echo "<br><br> <u>y=$y y contadorAlfabeto=$ContadorAlfabeto</u><br>";
     			if(($y)!=($ContadorAlfabeto))
-    				{								if($y==10)
+    				{								if($y==($ContadorAlfabeto-2))
 			    											{
 			    												echo "<br>entro a retroceso<br>";
 			    												include('verificar.php');
@@ -48,7 +36,7 @@
     				
     		
     						
-    				if($Bidimensional[$estadoActual][$y]!='-')
+    				if(($Bidimensional[$estadoActual][$y]!='-'))
     				{	
 							//echo"<BR>forzado";
 							//echo $Bidimensional[0][0];
@@ -239,6 +227,8 @@
 
 
     				}
+
+
     				else
     				{	
     					echo "es nulo<br>";
@@ -297,4 +287,5 @@
     					}
     					$activarIncremento=1;*/
     		}
+    	
  ?>

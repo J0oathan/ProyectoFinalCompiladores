@@ -28,12 +28,8 @@ $continua=0;
 		}*/
 //}
 		
-		if($caracteres[$caracterActual]==' ')
-				{
-					$continua=1;
-				}
-
-		else if(($estadoActual==1)||($estadoActual==5)||($estadoActual==6))
+		
+		if(($estadoActual==1)||($estadoActual==5)||($estadoActual==6))
 		{
 			if(($caracteres[$caracterActual]=='l')||($caracteres[$caracterActual]=='d'))
 				{
@@ -68,6 +64,17 @@ $continua=0;
 
 		}
 
+		else if($estadoActual==17)
+		{
+			if($caracteres[$caracterActual]=='=')
+				{
+					echo("CONTINUA HAY UN IGUAL<BR>");
+					$continua=1;
+				}
+
+		}
+
+	
 		
 	
 
