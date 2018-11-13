@@ -179,10 +179,12 @@ $ContadorPR= count($Reservadas);
 
             $var1 = TRIM($Reservadas[$d]);
             $var2 = $cadenita[$linea];
-            if (strcasecmp($var1,$var2) === 0){
+            if (strcasecmp($var1,$var2) === 0)
+            {
                //\\ echo " <br>encontrado<br>";   
 
                         $banderaReservada=1;
+                        
             }
             else {
               //\\echo "Los strings no coinciden";
