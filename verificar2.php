@@ -44,6 +44,82 @@ else if($estadoActual==26)
 
 }
 
+else if($estadoActual==28)
+{
+		$resultado[$au]='parA';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]='(';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+
+else if($estadoActual==29)
+{
+		$resultado[$au]='parC';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]=')';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+
+else if($estadoActual==30)
+{
+		$resultado[$au]='corcheteC';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]=']';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+
+else if($estadoActual==31)
+{
+		$resultado[$au]='corcheteA';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]='[';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+else if($estadoActual==32)
+{
+		$resultado[$au]='puntoycoma';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]=';';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+else if($estadoActual==33)
+{
+		$resultado[$au]='coma';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]=',';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+else if($estadoActual==34)
+{
+		$resultado[$au]='llaveC';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]='}';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+else if($estadoActual==35)
+{
+		$resultado[$au]='llaveA';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]='{';
+		$opcion=1;
+		include('Retroceso.php');
+
+}
+
 
 $caracterActual++;
 
