@@ -2,39 +2,38 @@
 $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inicio";$fin="fin";$ent="ent";$id="id";$c="c";$coma=",";$llaveC=")";$llaveA="{";$si="si";$sino="sino";$para="para";$escribe="escribe";$lee="lee";$mod="mod";$suma="suma";$resta="resta";$division="division";$multi="multi";$puntoycoma=";";$diferente="diferente";$menor="menor";$menorigual="menorigual";$mayor="mayor";$mayorigual="mayorigual";$igualigual="igualigual";$corcheteA="[";$corcheteC="]";$igual="igual";$parA="(";$parC=")";
 	function OP()
 	{
-		if($tokens[]==$mod)
+		if($preanalisis==$mod)
 		{
 			emparejar($mod);
 		}
-		else if($tokens[]==$suma)
+		else if($preanalisis==$suma)
 		{
 			emparejar($suma);
 		}
-		else if($tokens[]==$resta)
+		else if($preanalisis==$resta)
 		{	
 			emparejar($resta);
 		}
-		else if($tokens[]==$division)
+		else if($preanalisis==$division)
 		{
 			emparejar($division);
 		}
-		else if($token[]s==$multi)
+		else if($preanalisis==$multi)
 		{
 			emparejar($multi);
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un operador<br>";
 		}
 	}
 	function OP1()
 	{
-		if($tokens[]==$ent||$tokens[]==$c)
+		if($preanalisis==$ent||$preanalisis==$c)
 		{
 			CONSTANTE();
 		}
-		else if($tokens[]==$id)
+		else if($preanalisis==$id)
 		{
 			emparejar($id);
 
@@ -42,18 +41,17 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba entero, caracter o id<br>";
 		}
 
 	}
 	function OP1()
 	{
-		if($tokens[]==$ent||$tokens[]==$c)
+		if($preanalisis==$ent||$preanalisis==$c)
 		{
 			CONSTANTE();
 		}
-		else if($tokens[]==$id)
+		else if($preanalisis==$id)
 		{
 			emparejar($id);
 
@@ -61,13 +59,12 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba entero, caracter o id<br>";
 		}
 	}
 	function LEE()
 	{
-		if($tokens[]==$lee)
+		if($preanalisis==$lee)
 		{
 			emparejar($lee);
 			emparejar($parA);
@@ -79,14 +76,13 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba lee<br>";
 		}
 
 	}
 	function ESCRIBE()
 	{
-		if($tokens[]==$escribe)
+		if($preanalisis==$escribe)
 		{
 			emparejar($escribe);
 			emparejar($parA);
@@ -97,13 +93,12 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba escribe<br>";
 		}
 	}
 	function PARA()
 	{
-		if($tokens[]==$para)
+		if($preanalisis==$para)
 		{
 			emparejar($para);
 			emparejar($id);
@@ -121,13 +116,12 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba para<br>";
 		}	
 	}
 	function SI()
 	{
-		if($tokens[]==$si)
+		if($preanalisis==$si)
 		{
 			emparejar($si);
 			emparejar($parA);
@@ -136,23 +130,26 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 			emparejar($entonces);
 			INST();
 		}
+		else
+		{
+			echo "<br>Error Sintactico ".$preanalisis." esperaba si<br>";
+		}
 	}
 	function SINO()
 	{
-		if($tokens[]==$sino||$tokens[]==$fin)
+		if($preanalisis==$sino||$preanalisis==$fin)
 		{
 			emparejar($sino);
 			INST();
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba sino o fin<br>";
 		}	
 	}
 	function P()
 	{
-		if($tokens[]==$programa)
+		if($preanalisis==$programa)
 		{
 			emparejar($programa);
 			emparejar($id);
@@ -164,27 +161,24 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba palabra programa<br>";
 		}
 	}
 	function DC()
 	{
-		if($tokens[]==$constantes)
+		if($preanalisis==$constantes)
 		{
 			emparejar($constantes);
 			DC2();
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba palabra constantes<br>";
 		}
-
 	}
 	function DA()
 	{
-		if($tokens[]==$arreglos)
+		if($preanalisis==$arreglos)
 		{	
 			emparejar($arreglos);
 			DA2();
@@ -192,78 +186,67 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba palabra arreglos<br>";
 		}
 	}
 	function DC2()
 	{
-		if($tokens[]==$id)
+		if($preanalisis==$id)
 		{
 			emparejar($id);
 			emparejar($igual);
 			CONSTANTE();
 			DC3();
-
-
-
 		}
-
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un id<br>";
 		}
 	}
 	function DA2()
 	{
-		if($tokens[]=$id)
+		if($preanalisis=$id)
 		{
-			
-
 			emparejar($id);
 			emparejar($igual);
-
 			emparejar($llaveA);
 			D();
 			emparejar($llaveC);
 			DA3();
-		
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
-
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un id<br>";
 		}
 	}
 
 	function CONSTANTE()
 	{
-		if($tokens[]==$ent)
+		if($preanalisis==$ent)
 		{
 			emparejar($ent);
 
 		}
-		else if($tokens[]==$c)
+		else if($preanalisis==$c)
 		{
 			emparejar($c);
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un entero o caracter<br>";
 
 		}
 
 	}
 	function DC3()
 	{
-		if($tokens[]==$id)
+		if($preanalisis==$id)
 		{
 			DC2();
 		}
 		else
 		{
-			echo "<br>Error sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un id<br>";
 
 		}
 
@@ -279,7 +262,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un entero o id<br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -290,7 +273,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un entero, caracter o id<br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -301,7 +284,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba + o -<br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -316,7 +299,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba + o -<br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -341,7 +324,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 				emparejar($igualigual);
 				break;
 			default:
-				echo "<br>Error Sintactico<br>";
+				echo "<br>Error Sintactico ".$preanalisis." esperaba un simbolo relacional<br>";
 			//errorSintactico($lexema,$ent,$id);
 				break;
 		}
@@ -358,7 +341,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un operador, un simbolo relacional, =, ;, (, [, <br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -373,7 +356,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un entero o identificador<br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -388,7 +371,7 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 		else
 		{
-			echo "<br>Error Sintactico<br>";
+			echo "<br>Error Sintactico ".$preanalisis." esperaba un operador o ]<br>";
 			//errorSintactico($lexema,$ent,$id);
 		}
 	}
@@ -402,7 +385,7 @@ function DA3()
 		//es cadena vacia
 	}
 	else {
-		echo "Error sintactico".$preanalisis."esperaba un identificador o inicio";
+		echo "Error sintactico ".$preanalisis."esperaba un identificador o inicio";
 	}
 }
 
