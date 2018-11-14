@@ -393,4 +393,119 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 	}
 
+function DA3()
+{
+	if ($preanalisis== "id") {
+		DA2();
+	}
+	elseif ($preanalisis== "inicio") {
+		//es cadena vacia
+	}
+	else {
+		echo "Error sintactico".$preanalisis."esperaba un identificador o inicio";
+	}
+}
+
+function D()
+{
+	if ($preanalisis== "ent") {
+		emparejar("ent"); D2();
+	}
+	elseif ($preanalisis== "c") {
+		emparejar("c"); D3();
+	}
+	else {
+		echo "Error sintactico".$preanalisis."esperaba un entero o caracter";
+	}
+}
+
+function D2()
+{
+	if ($preanalisis== ",") {
+		emparejar(","); emparejar("ent"); D2();
+	}
+	elseif ($preanalisis== "}") {
+		//cadena vacia
+	}
+	else {
+		echo "Error sintactico".$preanalisis."esperaba , o }";
+	}
+}
+
+function D3()
+{
+	if ($preanalisis== ",") {
+		emparejar(","); emparejar("c"); D3();
+	}
+	elseif ($preanalisis== "}") {
+		//cadena vacia
+	}
+	else {
+		echo "Error sintactico".$preanalisis."esperaba , o }";
+	}
+}
+
+function INST()
+{
+	switch ($preanalisis) {
+		case 'si':
+			SI();
+			break;
+		case 'para':
+			PARA();
+			break;
+		case 'escribe':
+			ESCRIBE();
+			break;
+		case 'lee':
+			LEE();
+			break;
+		case 'id':
+			EXPR();
+			break;
+		case 'fin':
+			//cadena vacia
+			break;
+		default:
+			echo "Error sintactico".$preanalisis."esperaba si, para, escribe, lee, id o fin";
+			break;
+	}
+}
+
+function EXPR()
+{
+	if ($preanalisis== "id") {
+		emparejar("id"); ARR(); emparejar("="); OP1(); EXPR2(); emparejar(";"); INST();
+	}
+	
+	else {
+		echo "Error sintactico".$preanalisis."esperaba un identificador";
+	}
+}
+
+function EXPR2()
+{
+	if ($preanalisis== "suma" ||  $preanalisis== "resta" ||  $preanalisis== "division" ||  $preanalisis== "multi") {
+		OP(); OP1();
+	}
+	elseif ($preanalisis== ";") {
+		//cadena vacia
+	}
+	else {
+		echo "Error sintactico".$preanalisis."esperaba: suma, resta, división, multiplicación o ; ";
+	}
+}
+
+function emparejar($token)
+{
+	if ($token == $preanalisis) {
+		$preanalisis = analex();
+	}
+	else{
+		echo "Error sintáctico".$preanalisis." - ".$token;
+	}
+}
+
+
+
  ?>
