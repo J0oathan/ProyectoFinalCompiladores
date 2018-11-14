@@ -84,6 +84,13 @@
 			$opcion=2;
 			include('Retroceso.php');
 		}
+		else if($estadoActual==23)
+		{
+			$resultado[$au]='igual';
+			$lineas[$au3]=$linea;
+			$opcion=2;
+			include('Retroceso.php');
+		}
 		
 	
 	
