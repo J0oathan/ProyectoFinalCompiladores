@@ -3,16 +3,10 @@ inicio
 fin
 constantes
 arreglos
-{
-}
-,
 si
 para
 escribe
 lee
-;
-(
-)
 hasta
 paso
 hacer
