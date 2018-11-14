@@ -119,7 +119,15 @@ else if($estadoActual==35)
 		include('Retroceso.php');
 
 }
+else if($estadoActual==36)
+{
+		$resultado[$au]='punto';
+		$lineas[$au3]=$linea;
+		$lexema[$au2]='.';
+		$opcion=1;
+		include('Retroceso.php');
 
+}
 
 $caracterActual++;
 
