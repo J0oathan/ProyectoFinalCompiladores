@@ -9,7 +9,7 @@ $caracterActual--;
 
 if($estadoActual==19)
 {
-		$resultado[$au]='MENOR IGUAL';
+		$resultado[$au]='menorigual';
 		$lineas[$au3]=$linea;
 		$lexema[$au2]='<=';
 		$opcion=1;
@@ -18,7 +18,7 @@ if($estadoActual==19)
 
 else if($estadoActual==22)
 {
-			$resultado[$au]='MAYOR IGUAL';
+			$resultado[$au]='mayorigual';
 			$lineas[$au3]=$linea;
 			$lexema[$au2]='>=';
 			$opcion=1;
@@ -27,7 +27,7 @@ else if($estadoActual==22)
 
 else if($estadoActual==24)
 {
-			$resultado[$au]='IGUALDAD';
+			$resultado[$au]='igualigual';
 			$lexema[$au2]='==';
 			$lineas[$au3]=$linea;
 			$opcion=1;
@@ -36,7 +36,7 @@ else if($estadoActual==24)
 
 else if($estadoActual==26)
 {
-		$resultado[$au]='DIFERENTE';
+		$resultado[$au]='diferente';
 		$lineas[$au3]=$linea;
 		$lexema[$au2]='!=';
 		$opcion=1;

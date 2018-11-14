@@ -10,7 +10,7 @@
 
 		if($estadoActual==3)
 		{
-			$resultado[$au]='ENTERO';
+			$resultado[$au]='ent';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');
@@ -21,7 +21,7 @@
 		else if($estadoActual==1)
 		{
 			
-			$resultado[$au]='IDENTIFICADOR';
+			$resultado[$au]='id';
 			$lineas[$au3]=$linea;
 			
 			$tem=$cadenita[$linea];
@@ -32,7 +32,7 @@
 
 		else if($estadoActual==7)
 		{
-			$resultado[$au]='CARACTER';
+			$resultado[$au]='c';
 			$lineas[$au3]=$linea;
 
 			$opcion=2;
@@ -42,7 +42,7 @@
 		else if($estadoActual==9)
 
 		{
-			$resultado[$au]='SUMA';
+			$resultado[$au]='suma';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');
@@ -50,14 +50,14 @@
 		}
 		else if($estadoActual==11)
 		{
-			$resultado[$au]='RESTA';
+			$resultado[$au]='resta';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');
 		}
 		else if($estadoActual==13)
 		{
-			$resultado[$au]='MULTIPLICACION';
+			$resultado[$au]='multi';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');
@@ -65,21 +65,21 @@
 		}
 		else if($estadoActual==15)
 		{
-			$resultado[$au]='DIVISION';
+			$resultado[$au]='division';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');
 		}
 		else if($estadoActual==17)
 		{
-			$resultado[$au]='MENOR';
+			$resultado[$au]='menor';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');
 		}
 		else if($estadoActual==20)
 		{
-			$resultado[$au]='MAYOR';
+			$resultado[$au]='mayor';
 			$lineas[$au3]=$linea;
 			$opcion=2;
 			include('Retroceso.php');

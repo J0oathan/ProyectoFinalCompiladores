@@ -310,7 +310,7 @@ $g=1;
 */
    
 
-   /* echo "<br>Imprimir tokens<br>";
+    echo "<br>Imprimir tokens<br>";
     
     for($g=1;$g<=$superfinal;$g++)
     {
@@ -318,7 +318,7 @@ $g=1;
       echo "<br> $g:  ";
       echo $tokens[$g];
       echo "<br>";
-    }*/
+    }
      
       ?>
 </body>
