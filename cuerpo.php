@@ -346,9 +346,16 @@ echo "Hecho por Yaz y Diana";
     
     echo analex($tokens,$superfinal);
 
+
+
+    $holi=100;
+
     session_start();
     
-     $_SESSION['variable']=$tokens;
+     $_SESSION['variable']=$lexema;
+     $_SESSION['variable2']=$resultado;
+     $_SESSION['variable3']=$GuardarLineas;
+     $_SESSION['variable4']=$final;
 
 
       ?>
