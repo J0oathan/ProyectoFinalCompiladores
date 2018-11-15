@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-		<a href="../cuerpo.php">Ver ALGORITMO</a>
-		<br>
-</body>
-</html>
+
 <?php
 session_start();
-
+echo "<a href='../cuerpo.php'>Ver ALGORITMO</a><br>";
 $tokens;//solo declaro la variable tokens
 $final=$_SESSION['variable'][0]; //en la posicion 0 guarde el numero de vueltas
 $NumTokens=$final/3;
