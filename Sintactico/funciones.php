@@ -1,5 +1,5 @@
 <?php 
-$programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inicio";$fin="fin";$ent="ent";$id="id";$c="c";$coma=",";$llaveC=")";$llaveA="{";$si="si";$sino="sino";$para="para";$escribe="escribe";$lee="lee";$mod="mod";$suma="suma";$resta="resta";$division="division";$multi="multi";$puntoycoma=";";$diferente="diferente";$menor="menor";$menorigual="menorigual";$mayor="mayor";$mayorigual="mayorigual";$igualigual="igualigual";$corcheteA="[";$corcheteC="]";$igual="igual";$parA="(";$parC=")";
+$programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inicio";$fin="fin";$ent="ent";$id="id";$c="c";$coma="coma";$llaveC="llaveC";$llaveA="llaveA";$si="si";$sino="sino";$para="para";$escribe="escribe";$lee="lee";$mod="mod";$suma="suma";$resta="resta";$division="division";$multi="multi";$puntoycoma="puntoycoma";$diferente="diferente";$menor="menor";$menorigual="menorigual";$mayor="mayor";$mayorigual="mayorigual";$igualigual="igualigual";$corcheteA="corcheteA";$corcheteC="corcheteC";$igual="igual";$parA="parA";$parC="parC";
 	function OP()
 	{
 		if($preanalisis==$mod)
@@ -376,119 +376,119 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 		}
 	}
 
-function DA3()
-{
-	if ($preanalisis== "id") {
-		DA2();
+	function DA3()
+	{
+		if ($preanalisis== "id") {
+			DA2();
+		}
+		elseif ($preanalisis== "inicio") {
+			//es cadena vacia
+		}
+		else {
+			echo "Error sintactico ".$preanalisis."esperaba un identificador o inicio";
+		}
 	}
-	elseif ($preanalisis== "inicio") {
-		//es cadena vacia
-	}
-	else {
-		echo "Error sintactico ".$preanalisis."esperaba un identificador o inicio";
-	}
-}
 
-function D()
-{
-	if ($preanalisis== "ent") {
-		emparejar("ent"); D2();
+	function D()
+	{
+		if ($preanalisis== "ent") {
+			emparejar("ent"); D2();
+		}
+		elseif ($preanalisis== "c") {
+			emparejar("c"); D3();
+		}
+		else {
+			echo "Error sintactico".$preanalisis."esperaba un entero o caracter";
+		}
 	}
-	elseif ($preanalisis== "c") {
-		emparejar("c"); D3();
-	}
-	else {
-		echo "Error sintactico".$preanalisis."esperaba un entero o caracter";
-	}
-}
 
-function D2()
-{
-	if ($preanalisis== ",") {
-		emparejar(","); emparejar("ent"); D2();
-	}
-	elseif ($preanalisis== "}") {
-		//cadena vacia
-	}
-	else {
-		echo "Error sintactico".$preanalisis."esperaba , o }";
-	}
-}
-
-function D3()
-{
-	if ($preanalisis== ",") {
-		emparejar(","); emparejar("c"); D3();
-	}
-	elseif ($preanalisis== "}") {
-		//cadena vacia
-	}
-	else {
-		echo "Error sintactico".$preanalisis."esperaba , o }";
-	}
-}
-
-function INST()
-{
-	switch ($preanalisis) {
-		case 'si':
-			SI();
-			break;
-		case 'para':
-			PARA();
-			break;
-		case 'escribe':
-			ESCRIBE();
-			break;
-		case 'lee':
-			LEE();
-			break;
-		case 'id':
-			EXPR();
-			break;
-		case 'fin':
+	function D2()
+	{
+		if ($preanalisis== ",") {
+			emparejar(","); emparejar("ent"); D2();
+		}
+		elseif ($preanalisis== "}") {
 			//cadena vacia
-			break;
-		default:
-			echo "Error sintactico".$preanalisis."esperaba si, para, escribe, lee, id o fin";
-			break;
+		}
+		else {
+			echo "Error sintactico".$preanalisis."esperaba , o }";
+		}
 	}
-}
 
-function EXPR()
-{
-	if ($preanalisis== "id") {
-		emparejar("id"); ARR(); emparejar("="); OP1(); EXPR2(); emparejar(";"); INST();
+	function D3()
+	{
+		if ($preanalisis== ",") {
+			emparejar(","); emparejar("c"); D3();
+		}
+		elseif ($preanalisis== "}") {
+			//cadena vacia
+		}
+		else {
+			echo "Error sintactico".$preanalisis."esperaba , o }";
+		}
 	}
-	
-	else {
-		echo "Error sintactico".$preanalisis."esperaba un identificador";
-	}
-}
 
-function EXPR2()
-{
-	if ($preanalisis== "suma" ||  $preanalisis== "resta" ||  $preanalisis== "division" ||  $preanalisis== "multi") {
-		OP(); OP1();
+	function INST()
+	{
+		switch ($preanalisis) {
+			case 'si':
+				SI();
+				break;
+			case 'para':
+				PARA();
+				break;
+			case 'escribe':
+				ESCRIBE();
+				break;
+			case 'lee':
+				LEE();
+				break;
+			case 'id':
+				EXPR();
+				break;
+			case 'fin':
+				//cadena vacia
+				break;
+			default:
+				echo "Error sintactico".$preanalisis."esperaba si, para, escribe, lee, id o fin";
+				break;
+		}
 	}
-	elseif ($preanalisis== ";") {
-		//cadena vacia
-	}
-	else {
-		echo "Error sintactico".$preanalisis."esperaba: suma, resta, división, multiplicación o ; ";
-	}
-}
 
-function emparejar($token)
-{
-	if ($token == $preanalisis) {
-		$preanalisis = analex();
+	function EXPR()
+	{
+		if ($preanalisis== "id") {
+			emparejar("id"); ARR(); emparejar("="); OP1(); EXPR2(); emparejar(";"); INST();
+		}
+		
+		else {
+			echo "Error sintactico".$preanalisis."esperaba un identificador";
+		}
 	}
-	else{
-		echo "Error sintáctico".$preanalisis." - ".$token;
-	}
-}
 
+	function EXPR2()
+	{
+		if ($preanalisis== "suma" ||  $preanalisis== "resta" ||  $preanalisis== "division" ||  $preanalisis== "multi") {
+			OP(); OP1();
+		}
+		elseif ($preanalisis== ";") {
+			//cadena vacia
+		}
+		else {
+			echo "Error sintactico".$preanalisis."esperaba: suma, resta, división, multiplicación o ; ";
+		}
+	}
+
+	function emparejar($token)
+	{
+		if ($token == $preanalisis) {
+			$preanalisis = analex();
+		}
+		else{
+			echo "Error sintáctico".$preanalisis." - ".$token;
+		}
+	}
+emparejar();
 
 
  ?>
