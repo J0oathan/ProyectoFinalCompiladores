@@ -212,9 +212,9 @@ echo "Estados finales---- $estF <br>";    //estado final
     </div>-->
 
 
-    <button class="button" onclick="document.getElementById('id01').style.display='block'">Insertar cadena</button>
+    <!--<button class="button" onclick="document.getElementById('id01').style.display='block'">Insertar cadena</button>
      <br><br><br><br><br><br>
-
+-->
 <!-- The Modal -->
 <div id="id01" class="modal" align="center">
   <span onclick="document.getElementById('id01').style.display='none'" 

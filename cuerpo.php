@@ -80,7 +80,7 @@ for ($i = 0; $i < $ContadorCaracteres; $i++)
 
 
  
-    $letra="/[a-zA-z]/";
+    $letra="/[a-zA-Z]/";
     $numero="/[0-9]/";
     if (preg_match($letra,$variable))
      {
