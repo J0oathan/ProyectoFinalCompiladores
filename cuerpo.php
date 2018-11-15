@@ -4,14 +4,20 @@
 <html>
 <head>
 	<title></title>
+
+  <?php 
+   echo "<META HTTP-EQUIV='REFRESH' CONTENT='1;URL=Sintactico/analex.php'> </head> ";
+   ?>
 	
 
 
 </head>
 <body background="black">
-	
-
+compilando...	
   <?php 
+
+  echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+  echo "<a href='Sintactico/analex.php'>pasar a analex</a>";
    error_reporting (0);  
 
   //esto solo es para ver cuantos ciclos dara dependieno las linea del editor del a web
@@ -347,7 +353,7 @@ echo "Hecho por Yaz y Diana";
 
       ?>
       <br><br>
-<a href="Sintactico/analex.php">pasar a analex</a>
+
       
 </body>
 </html>
