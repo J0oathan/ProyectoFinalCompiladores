@@ -2,4 +2,4 @@ programa pares 22
 constantes num=5
 valores
 hilo
-44
+44 []
