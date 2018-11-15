@@ -320,10 +320,13 @@ $g=1;
       echo $tokens[$g];
       echo "<br>";
     }
+
+$tokens[0]=$superfinal;
+
 echo "Hecho por Yaz y Diana";
     function analex($tokens,$superfinal)    {
       $yd=1;
-      for($s=1; $s<=$superfinal; $s++)   
+      for($s=0; $s<=$superfinal; $s++)   
         {
           echo "<br>";
               //echo "Elemento $s".$tokens[$s];
@@ -337,8 +340,15 @@ echo "Hecho por Yaz y Diana";
     
     echo analex($tokens,$superfinal);
 
-     
+    session_start();
+    
+     $_SESSION['variable']=$tokens;
+
+
       ?>
+      <br><br>
+<a href="Sintactico/analex.php">pasar a analex</a>
+      
 </body>
 </html>
 
