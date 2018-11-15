@@ -239,6 +239,7 @@ $ContadorPR= count($Reservadas);
 
              $linea++;
             echo "<br><font color='blue'> Aumento liinea<br></font>";
+            $final;
     		$final=$au;
 
         echo "<br>numero de vueltas $final<br>";
@@ -320,33 +321,21 @@ $g=1;
       echo "<br>";
     }
 echo "Hecho por Yaz y Diana";
-    function analex($tokens)    {
-      $yd=0;
-      for($s=0; $s<=$final; $s++)   
+    function analex($tokens,$superfinal)    {
+      $yd=1;
+      for($s=1; $s<=$superfinal; $s++)   
         {
-          //echo "<br>$s";
-              echo $tokens[$s];
-              /*
-              echo "< ";
-              echo $lexema[$s];
-              echo ", ";
-              echo $resultado[$s];
-              echo ", ";
-              echo $lineas[$s]+1;
-              echo ">";
-                
-              $GuardarLineas[$yd]=$lineas[$s]+1;
-              echo $GuardarLineas;
-              echo "<br>";
-             */
+          echo "<br>";
+              //echo "Elemento $s".$tokens[$s];
+              echo "Elemento". $s. $tokens[$s];
               $yd++;
 
              
         }
         //return $final;
     }
-    echo analex($tokens);
-    analex($tokens);
+    
+    echo analex($tokens,$superfinal);
 
      
       ?>
