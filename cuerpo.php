@@ -319,6 +319,35 @@ $g=1;
       echo $tokens[$g];
       echo "<br>";
     }
+echo "Hecho por Yaz y Diana";
+    function analex($tokens)    {
+      $yd=0;
+      for($s=0; $s<=$final; $s++)   
+        {
+          //echo "<br>$s";
+              echo $tokens[$s];
+              /*
+              echo "< ";
+              echo $lexema[$s];
+              echo ", ";
+              echo $resultado[$s];
+              echo ", ";
+              echo $lineas[$s]+1;
+              echo ">";
+                
+              $GuardarLineas[$yd]=$lineas[$s]+1;
+              echo $GuardarLineas;
+              echo "<br>";
+             */
+              $yd++;
+
+             
+        }
+        //return $final;
+    }
+    echo analex($tokens);
+    analex($tokens);
+
      
       ?>
 </body>
