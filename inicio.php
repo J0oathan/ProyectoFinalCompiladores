@@ -8,7 +8,7 @@
 
    <frameset rows="2000" cols="470,*"  frameborder="yes" framespacing="2"  border="15" bordercolor="black">
   <frame src="Editar/editor.php" name="MarcoVerde" frameborder="no" scrolling="no" id="marcoizquierdo">
-  <frame src="Sintactico/analex.php" name="algoritmo" frameborder="no" scrolling="yes" id="en medio">
+  <frame src="Sintactico/funciones.php" name="algoritmo" frameborder="no" scrolling="yes" id="en medio">
  
   
 </frameset>

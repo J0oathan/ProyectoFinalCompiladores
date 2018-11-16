@@ -1,1 +1,4 @@
-programa pares 22
+programa hola
+inicio
+var=1;
+fin
