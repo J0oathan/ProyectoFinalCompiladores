@@ -32,7 +32,7 @@ echo "<b>numero de tokens $NumTokens</b><br>";
 global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
 
 
-$programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inicio";$fin="fin";$ent="ent";$id="id";$c="c";$coma="coma";$llaveC="llaveC";$llaveA="llaveA";$si="si";$sino="sino";$para="para";$escribe="escribe";$lee="lee";$mod="mod";$suma="suma";$resta="resta";$division="division";$multi="multi";$puntoycoma="puntoycoma";$diferente="diferente";$menor="menor";$menorigual="menorigual";$mayor="mayor";$mayorigual="mayorigual";$igualigual="igualigual";$corcheteA="corcheteA";$corcheteC="corcheteC";$igual="igual";$parA="parA";$parC="parC"; $entonces="entonces";
+$programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inicio";$fin="fin";$ent="ent";$id="id";$c="c";$coma="coma";$llaveC="llaveC";$llaveA="llaveA";$si="si";$sino="sino";$para="para";$escribe="escribe";$lee="lee";$mod="mod";$suma="suma";$resta="resta";$division="division";$multi="multi";$puntoycoma="puntoycoma";$diferente="diferente";$menor="menor";$menorigual="menorigual";$mayor="mayor";$mayorigual="mayorigual";$igualigual="igualigual";$corcheteA="corcheteA";$corcheteC="corcheteC";$igual="igual";$parA="parA";$parC="parC"; $hasta="hasta";$paso="paso";$entonces="entonces";$hacer="hacer";
 	
 	$lexi="";
 $titok="";
@@ -94,146 +94,7 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
      	echo "<br>NumLinea: ";
      	echo $NumLinea[$i];echo "<br><br>";
      }
-
-	function OP()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if($preanalisis==$mod)
-		{
-			emparejar($mod);
-		}
-		else if($preanalisis==$suma)
-		{
-			emparejar($suma);
-		}
-		else if($preanalisis==$resta)
-		{	
-			emparejar($resta);
-		}
-		else if($preanalisis==$division)
-		{
-			emparejar($division);
-		}
-		else if($preanalisis==$multi)
-		{
-			emparejar($multi);
-		}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba un operador<br>";
-		}
-	}
-	function OP1()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if($preanalisis==$ent||$preanalisis==$c)
-		{
-			CONSTANTE();
-		}
-		else if($preanalisis==$id)
-		{
-			emparejar($id);
-
-			ARR();
-		}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba entero, caracter o id<br>";
-		}
-
-	}
-	function LEE()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if($preanalisis==$lee)
-		{
-			emparejar($lee);
-			emparejar($parA);
-			CONSTANTE();
-			emparejar($parC);
-			emparejar($puntoycoma);
-			INST();
-
-		}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba lee<br>";
-		}
-
-	}
-	function ESCRIBE()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if($preanalisis==$escribe)
-		{
-			emparejar($escribe);
-			emparejar($parA);
-			OP1();
-			emparejar($parC);
-			emparejar($puntoycoma);
-			INST();
-		}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba escribe<br>";
-		}
-	}
-	function PARA()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if($preanalisis==$para)
-		{
-			emparejar($para);
-			emparejar($id);
-			emparejar($igual);
-			LIMIT();
-			emparejar($hasta);
-			LIMIT();
-			emparejar($paso);
-			INCDEC();
-			emparejar($hacer);
-			INST();
-			emparejar($fin);
-			INST();
-
-		}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba para<br>";
-		}	
-	}
-	function SI()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$entonces;
-		if($preanalisis==$si)
-		{
-			emparejar($si);
-			emparejar($parA);
-			CONDICION();
-			emparejar($parC);
-			emparejar($entonces);
-			INST();
-		}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba si<br>";
-		}
-	}
-	function SINO()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if($preanalisis==$sino||$preanalisis==$fin)
-		{
-			emparejar($sino);
-			INST();
-		}
-		else if($preanalisis==$fin){}
-		else
-		{
-			echo "<br>->Error Sintactico ".$preanalisis." esperaba sino o fin<br>";
-		}	
-	}
-	function P()
+     function P()
 	{
 		
 		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
@@ -355,6 +216,274 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 			echo "<br>->Error Sintactico ".$preanalisis." esperaba un id<br>";
 		}
 
+	}
+	function DA3()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if ($preanalisis== $id) {
+			DA2();
+		}
+		else if ($preanalisis== $inicio) {
+			//es cadena vacia
+		}
+		else {
+			echo "->Error sintactico ".$preanalisis."esperaba un identificador o inicio";
+		}
+	}
+
+	function D()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if ($preanalisis== $ent) {
+			emparejar($ent); D2();
+		}
+		else if ($preanalisis== $c) {
+			emparejar($c); D3();
+		}
+		else {
+			echo "->Error sintactico".$preanalisis."esperaba un entero o caracter";
+		}
+	}
+
+	function D2()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if ($preanalisis== $coma) {
+			emparejar($coma); emparejar($ent); D2();
+		}
+		else if ($preanalisis== $llaveC) {
+			//cadena vacia
+		}
+		else {
+			echo "->Error sintactico".$preanalisis."esperaba , o }";
+		}
+	}
+
+	function D3()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if ($preanalisis== $coma) {
+			emparejar($coma); emparejar($c); D3();
+		}
+		else if ($preanalisis == $llaveC) {
+			
+		}
+		else {
+			echo "->Error sintactico El token de preanalisis es: ".$preanalisis."y eesperaba , o }";
+		}
+	}
+
+	function INST()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+
+		if ($preanalisis == $si) {
+			SI();
+		}
+		else if ($preanalisis == $para) {
+			PARA();
+		}
+		else if ($preanalisis == $escribe) {
+			ESCRIBE();
+		}
+		else if ($preanalisis == $lee) {
+			LEE();
+		}
+		else if ($preanalisis == $id) {
+			EXPR();
+		}
+		else if ($preanalisis == $fin) {
+			
+		}
+		else   {
+			echo "->Error sintactico".$preanalisis." Se esperaba si, para, escribe, lee, id o fin";
+		}
+		/*switch ($preanalisis) {
+			case $si:
+				SI();
+				break;
+			case $para:
+				PARA();
+				break;
+			case $escribe:
+				ESCRIBE();
+				break;
+			case $lee:
+				LEE();
+				break;
+			case $id:
+				EXPR();
+				break;
+			case $fin:
+				//cadena vacia
+				break;
+			default:
+				echo "->Error sintactico".$preanalisis."esperaba si, para, escribe, lee, id o fin";
+				break;
+		}*/
+	}
+
+	function EXPR()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if ($preanalisis== $id) {
+			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
+		}
+		
+		else {
+			echo "->Error sintactico".$preanalisis."esperaba un identificador";
+		}
+	}
+
+	function EXPR2()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi) {
+			OP(); OP1();
+		}
+		elseif ($preanalisis== $puntoycoma) {
+			//cadena vacia
+		}
+		else {
+			echo "->Error sintactico".$preanalisis."esperaba: suma, resta, división, multiplicación o ; ";
+		}
+	}
+	function OP()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if($preanalisis==$mod)
+		{
+			emparejar($mod);
+		}
+		else if($preanalisis==$suma)
+		{
+			emparejar($suma);
+		}
+		else if($preanalisis==$resta)
+		{	
+			emparejar($resta);
+		}
+		else if($preanalisis==$division)
+		{
+			emparejar($division);
+		}
+		else if($preanalisis==$multi)
+		{
+			emparejar($multi);
+		}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba un operador<br>";
+		}
+	}
+	function OP1()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if($preanalisis==$ent||$preanalisis==$c)
+		{
+			CONSTANTE();
+		}
+		else if($preanalisis==$id)
+		{
+			emparejar($id); ARR();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba entero, caracter o id<br>";
+		}
+
+	}
+	function LEE()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if($preanalisis==$lee)
+		{
+			emparejar($lee);
+			emparejar($parA);
+			CONSTANTE();
+			emparejar($parC);
+			emparejar($puntoycoma);
+			INST();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba lee<br>";
+		}
+
+	}
+	function ESCRIBE()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if($preanalisis==$escribe)
+		{
+			emparejar($escribe);
+			emparejar($parA);
+			OP1();
+			emparejar($parC);
+			emparejar($puntoycoma);
+			INST();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba escribe<br>";
+		}
+	}
+	function PARA()
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$hasta,$paso,$hacer;
+		if($preanalisis==$para)
+		{
+			emparejar($para);
+			emparejar($id);
+			emparejar($igual);
+			LIMIT();
+			emparejar($hasta);
+			LIMIT();
+			emparejar($paso);
+			INCDEC();
+			emparejar($hacer);
+			INST();
+			emparejar($fin);
+			INST();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba para<br>";
+		}	
+	}
+	function SI()   /////xxx
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$entonces;
+		if($preanalisis==$si)
+		{
+			emparejar($si);
+			emparejar($parA);
+			CONDICION();
+			emparejar($parC);
+			emparejar($entonces);
+			INST();
+			SINO();
+			emparejar($fin);
+			INST();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba si<br>";
+		}
+	}
+	function SINO() /////xxx
+	{
+		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		if($preanalisis==$sino)
+		{
+			emparejar($sino);
+			INST();
+		}
+		else if($preanalisis==$fin){}
+		else
+		{
+			echo "<br>->Error Sintactico ".$preanalisis." esperaba sino o fin<br>";
+		}	
 	}
 	function LIMIT()
 	{
@@ -509,138 +638,6 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 		{
 			echo "<br>->Error Sintactico ".$preanalisis." esperaba un operador o ]<br>";
 			//->ErrorSintactico($lexema,$ent,$id);
-		}
-	}
-
-	function DA3()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if ($preanalisis== $id) {
-			DA2();
-		}
-		else if ($preanalisis== $inicio) {
-			//es cadena vacia
-		}
-		else {
-			echo "->Error sintactico ".$preanalisis."esperaba un identificador o inicio";
-		}
-	}
-
-	function D()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if ($preanalisis== $ent) {
-			emparejar($ent); D2();
-		}
-		elseif ($preanalisis== $c) {
-			emparejar($c); D3();
-		}
-		else {
-			echo "->Error sintactico".$preanalisis."esperaba un entero o caracter";
-		}
-	}
-
-	function D2()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if ($preanalisis== $coma) {
-			emparejar($coma); emparejar($ent); D2();
-		}
-		else if ($preanalisis== $llaveC) {
-			//cadena vacia
-		}
-		else {
-			echo "->Error sintactico".$preanalisis."esperaba , o }";
-		}
-	}
-
-	function D3()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if ($preanalisis== $coma) {
-			emparejar($coma); emparejar($c); D3();
-		}
-		else if ($preanalisis == $llaveC) {
-			
-		}
-		else {
-			echo "->Error sintactico El token de preanalisis es: ".$preanalisis."y eesperaba , o }";
-		}
-	}
-
-	function INST()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-
-		if ($preanalisis == $si) {
-			SI();
-		}
-		else if ($preanalisis == $para) {
-			PARA();
-		}
-		else if ($preanalisis == $escribe) {
-			ESCRIBE();
-		}
-		else if ($preanalisis == $lee) {
-			LEE();
-		}
-		else if ($preanalisis == $id) {
-			EXPR();
-		}
-		else if ($preanalisis == $fin) {
-			
-		}
-		else   {
-			echo "->Error sintactico".$preanalisis."esperaba si, para, escribe, lee, id o fin";
-		}
-		/*switch ($preanalisis) {
-			case $si:
-				SI();
-				break;
-			case $para:
-				PARA();
-				break;
-			case $escribe:
-				ESCRIBE();
-				break;
-			case $lee:
-				LEE();
-				break;
-			case $id:
-				EXPR();
-				break;
-			case $fin:
-				//cadena vacia
-				break;
-			default:
-				echo "->Error sintactico".$preanalisis."esperaba si, para, escribe, lee, id o fin";
-				break;
-		}*/
-	}
-
-	function EXPR()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if ($preanalisis== $id) {
-			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
-		}
-		
-		else {
-			echo "->Error sintactico".$preanalisis."esperaba un identificador";
-		}
-	}
-
-	function EXPR2()
-	{
-		global $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
-		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi) {
-			OP(); OP1();
-		}
-		elseif ($preanalisis== $puntoycoma) {
-			//cadena vacia
-		}
-		else {
-			echo "->Error sintactico".$preanalisis."esperaba: suma, resta, división, multiplicación o ; ";
 		}
 	}
 	function emparejar($tok)
