@@ -2,9 +2,7 @@ programa pares
 constantes num=5
 arreglos valores={5, 7, 2, 4, 8}
 inicio 
-   car='1';
-   lee('car');
-  si(car=='p') entonces
-x=1;
+
+car4=2;
+arreglo[1]=2;
 fin
- fin
