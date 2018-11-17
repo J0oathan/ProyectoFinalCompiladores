@@ -1,4 +1,10 @@
-programa hola
-inicio
-var=1;
+programa pares
+constantes num=5
+arreglos valores={5, 7, 2, 4, 8}
+inicio 
+car='1';
+car2='2';
+car3 = 3;
+
+
 fin
