@@ -479,7 +479,9 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 			emparejar($sino);
 			INST();
 		}
-		else if($preanalisis==$fin){}
+		else if($preanalisis==$fin){
+			echo "cadena vacia del SINO";
+		}
 		else
 		{
 			echo "<br>->Error Sintactico ".$preanalisis." esperaba sino o fin<br>";
