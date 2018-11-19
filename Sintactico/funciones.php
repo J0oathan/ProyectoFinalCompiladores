@@ -12,10 +12,10 @@ $final=$_SESSION['variable4']; //en la posicion 0 guarde el numero de vueltas
 
 
 
-$NumTokens=$final/3;
+/*$NumTokens=$final/3;
 echo "<b>numero de vueltas $final</b><br>";
 echo "<b>numero de tokens $NumTokens</b><br>";
-
+*/
 
 //pasa la variables de session a los 3 arreglos
  for($i=0;$i<$final;$i++)
@@ -292,6 +292,9 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 		else if ($preanalisis == $id) {
 			EXPR();
 		}
+		else if ($preanalisis == $sino) {
+			SINO();
+		}
 		else if ($preanalisis == $fin) {
 			
 		}
@@ -480,7 +483,6 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 			INST();
 		}
 		else if($preanalisis==$fin){
-			echo "cadena vacia del SINO";
 		}
 		else
 		{

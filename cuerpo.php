@@ -6,7 +6,7 @@
 	<title></title>
 
   <?php 
-   echo "<META HTTP-EQUIV='REFRESH' CONTENT='2;URL=Sintactico/funciones.php'> </head> ";
+   echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=Sintactico/funciones.php'> </head> ";
    ?>
 	
 
@@ -17,7 +17,7 @@ compilando...
   <?php 
 
   echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-  echo "<a href='Sintactico/analex.php'>pasar a analex</a>";
+  echo "<a href='Sintactico/funciones.php'>pasar a analex</a>";
    error_reporting (0);  
 
   //esto solo es para ver cuantos ciclos dara dependieno las linea del editor del a web
@@ -252,30 +252,41 @@ $ContadorPR= count($Reservadas);
 
     		echo("<br><br><font color='yellow'> au vale $au y $au2 TERMINO los resultados son<br></font>");
         $au4=0;
+        $lexema2= array();
+        $resultado2= array();
+        $lineas2= array();
     		for($s=0; $s<=$final; $s++)
     			
     		{
 
           // "<br> linea $s->";
     			   //echo $resultado[$s];
-             if(empty($resultado[$s]))
+             if(empty($resultado[$s]) || empty($lexema[$s]))
              {
                 
              }
+
              else
              {
               echo "< ";
+              array_push($lexema2, $lexema[$s]);
               echo $lexema[$s];
               echo ", ";
-
+              array_push($resultado2,$resultado[$s] );
               echo $resultado[$s];
               echo ", ";
               echo $lineas[$s]+1;
               echo ">";
                 
               $GuardarLineas[$au4]=$lineas[$s]+1;
-              
+              array_push($lineas2, $GuardarLineas[$au4]);
               echo "<br>";
+              echo "<br>";
+              echo "<br>";echo "<br>";echo "<br>";echo "<br>";             
+              
+
+
+              
              
               $au4++;
 
@@ -283,6 +294,14 @@ $ContadorPR= count($Reservadas);
              
     		}
         echo "<br> ";
+        echo "Aqui se imprime el array lexema2<br>";
+              print_r($lexema2);
+              echo "<br> ";
+        echo "Aqui se imprime el array resultado2<br>";
+              print_r($resultado2);
+              echo "<br> ";
+        echo "Aqui se imprime el array lineas2<br>";
+              print_r($lineas2);
         
     	 		
 }//cierro aqui while
@@ -352,10 +371,10 @@ echo "Hecho por Yaz y Diana";
 
     session_start();
     
-     $_SESSION['variable']=$lexema;
-     $_SESSION['variable2']=$resultado;
-     $_SESSION['variable3']=$GuardarLineas;
-     $_SESSION['variable4']=$final;
+     $_SESSION['variable']=$lexema2;
+     $_SESSION['variable2']=$resultado2;
+     $_SESSION['variable3']=$lineas2;
+     $_SESSION['variable4']=count($lexema2);
 
 
       ?>
