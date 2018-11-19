@@ -261,12 +261,12 @@ $ContadorPR= count($Reservadas);
   
           // "<br> linea $s->";
     			   //echo $resultado[$s];
-             if(empty($lexema[$s]) || empty($resultado[$s]))
+             if(!strlen($lexema[$s]) || !strlen($resultado[$s]))
              {
                 
              }
 
-             else
+             else 
              {
               echo "< ";
               $lexema[$s] = strtolower( $lexema[$s]);
