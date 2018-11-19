@@ -1,17 +1,27 @@
- programa prueba
-constantes num = 3
-arreglos valores={'2'}
-inicio
-num=2;
-num2='2';
-arreglo[2+3]=3;
-si (x==2) entonces
-para c=3 hasta 5 paso +1 hacer
-x=2;
+programa pares
+     constantes num=5
+arreglos valores={5, 7, 2, 4, 8}
+	inicio 
+car='1';
+    lee('car');
+lim=valores.length-1;
+	si (car=='p') entonces
+para var=lim hasta 10 paso -1 hacer
+par=valores[var] mod 2;si (par!=10) entonces
+valores[var]=valores[var]+1;
 fin
+fin
+	sino	
+si (car=='i') entonces para var=lim hasta 10 paso -1 hacer
+impar=valores[var] mod 2;
+si (par==10) entonces
+		valores[var]=valores[var]+1;
+fin
+fin
+
+
 sino
-si (3<1) entonces
-x=4;
+escribe('10');
 fin
 fin
 fin
