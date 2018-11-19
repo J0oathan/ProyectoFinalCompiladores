@@ -1,8 +1,1 @@
-programa pares
-constantes num=5
-arreglos valores={5, 7, 2, 4, 8}
-inicio 
-
-car4=2;
-arreglo[1]=2;
-fin
+ id= 2 hasta 3
