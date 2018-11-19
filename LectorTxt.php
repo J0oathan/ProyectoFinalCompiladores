@@ -111,7 +111,7 @@ $Bidimensional;
 										       {
 										         // echo "<script>console.log($ContadorEstados);</script>";
 										         // echo "<script>console.log($ContadorAlfabeto);</script>";
-										            echo "<li>d(".$Estados[$i].",".$Alfabeto[$j].") = ".$Bidimensional[$i][$j]."</li>";
+										           // echo "<li>d(".$Estados[$i].",".$Alfabeto[$j].") = ".$Bidimensional[$i][$j]."</li>";
 										       }
 										       $cont++;
 									}

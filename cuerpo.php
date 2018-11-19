@@ -6,7 +6,7 @@
 	<title></title>
 
   <?php 
-   echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=Sintactico/funciones.php'> </head> ";
+   echo "<META HTTP-EQUIV='REFRESH' CONTENT='2;URL=Sintactico/funciones.php'> </head> ";
    ?>
 	
 
@@ -261,7 +261,7 @@ $ContadorPR= count($Reservadas);
 
           // "<br> linea $s->";
     			   //echo $resultado[$s];
-             if(empty($resultado[$s]) || empty($lexema[$s]))
+             if((empty($lexema[$s]) && ($lexema[$s]!=0 )) || empty($resultado[$s]))
              {
                 
              }
@@ -308,7 +308,7 @@ $ContadorPR= count($Reservadas);
 
  //aqui guarda los tres arreglos en uno solo
 
-$superfinal=$final*3;
+/*$superfinal=$final*3;
 $g=1;
 
     while($gg<=$final)
@@ -323,7 +323,7 @@ $g=1;
         $gg++;
 
 
-    }
+    }*/
 
 
    /*  echo "<br>imprime lineas<br>";
@@ -336,7 +336,7 @@ $g=1;
 */
    
 
-    echo "<br>Imprimir tokens<br>";
+   /* echo "<br>Imprimir tokens<br>";
     
     for($g=1;$g<=$superfinal;$g++)
     {
@@ -344,11 +344,11 @@ $g=1;
       echo "<br> $g:  ";
       echo $tokens[$g];
       echo "<br>";
-    }
+    }*/
 
-$tokens[0]=$superfinal;
+//$tokens[0]=$superfinal;
 
-echo "Hecho por Yaz y Diana";
+/*echo "Hecho por Yaz y Diana";
     function analex($tokens,$superfinal)    {
       $yd=1;
       for($s=0; $s<=$superfinal; $s++)   
@@ -363,11 +363,10 @@ echo "Hecho por Yaz y Diana";
         //return $final;
     }
     
-    echo analex($tokens,$superfinal);
+    echo analex($tokens,$superfinal);*/
 
 
 
-    $holi=100;
 
     session_start();
     
