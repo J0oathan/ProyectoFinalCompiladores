@@ -6,7 +6,7 @@
 	<title></title>
 
   <?php 
-   echo "<META HTTP-EQUIV='REFRESH' CONTENT='2;URL=Sintactico/funciones.php'> </head> ";
+   echo "<META HTTP-EQUIV='REFRESH' CONTENT='1;URL=Sintactico/funciones.php'> </head> ";
    ?>
 	
 
@@ -258,7 +258,7 @@ $ContadorPR= count($Reservadas);
     		for($s=0; $s<=$final; $s++)
     			
     		{
-
+  
           // "<br> linea $s->";
     			   //echo $resultado[$s];
              if((empty($lexema[$s]) && ($lexema[$s]!=0 )) || empty($resultado[$s]))
@@ -269,9 +269,11 @@ $ContadorPR= count($Reservadas);
              else
              {
               echo "< ";
+              $lexema[$s] = strtolower( $lexema[$s]);
               array_push($lexema2, $lexema[$s]);
               echo $lexema[$s];
               echo ", ";
+              $res[$s] = strtolower( $resultado[$s]);
               array_push($resultado2,$resultado[$s] );
               echo $resultado[$s];
               echo ", ";
@@ -279,6 +281,7 @@ $ContadorPR= count($Reservadas);
               echo ">";
                 
               $GuardarLineas[$au4]=$lineas[$s]+1;
+              $GuardarLineas[$s] = strtolower( $GuardarLineas[$s]);
               array_push($lineas2, $GuardarLineas[$au4]);
               echo "<br>";
               echo "<br>";
