@@ -261,7 +261,7 @@ $ContadorPR= count($Reservadas);
   
           // "<br> linea $s->";
     			   //echo $resultado[$s];
-             if((empty($lexema[$s]) && ($lexema[$s]!=0 )) || empty($resultado[$s]))
+             if(empty($lexema[$s]) || empty($resultado[$s]))
              {
                 
              }

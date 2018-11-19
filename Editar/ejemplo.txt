@@ -1,1 +1,19 @@
-lim=0;
+ programa prueba
+constantes num = 3
+arreglos valores={'2'}
+inicio
+num=2;
+num2='2';
+arreglo[2+3]=3;
+si (x==2) entonces
+para c=3 hasta 5 paso +1 hacer
+x=2;
+fin
+sino
+si (3<1) entonces
+x=4;
+fin
+fin
+fin
+
+
