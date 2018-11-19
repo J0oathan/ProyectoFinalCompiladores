@@ -18,9 +18,10 @@ if (isset($_POST['content']))
 }
 ?>
 <div style="width:440px; text-align: center; margin: auto; background-color: #F0F0F0; border: 1px solid #B3B9D5; border-color: #B3B9D5; padding: 15px; font-family: Verdana, Arial, Helvetica, sans-serif; color: #717CB0; font-size: 14px;">
-Editor  <br><br>
+
 <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="post">
-<textarea rows="25" cols="50" name="content"><?php readfile($fn); ?></textarea>
+<textarea rows="32" cols="1">01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32</textarea>	
+<textarea rows="32" cols="50" name="content"><?php readfile($fn); ?></textarea>
 <br />
 <br />
 <input type="submit" style="font-family:Arial;font-size:10pt;width:200px;height:30px;
