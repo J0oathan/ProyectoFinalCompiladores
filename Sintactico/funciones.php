@@ -10,7 +10,8 @@ $TipoTokens;
 $NumLinea;
 $final=$_SESSION['variable4']; //en la posicion 0 guarde el numero de vueltas
 
-
+$asigVar = array();
+$preanalisis2 = array();
 
 /*$NumTokens=$final/3;
 echo "<b>numero de vueltas $final</b><br>";
@@ -38,47 +39,62 @@ $programa="programa";$constantes="constantes";$arreglos="arreglos";$inicio="inic
 $titok="";
 $contan2=-1;  //contador que dice qué número de token va
 $c3=0;
-global $preanalisis2,$preanalisis;
+global $preanalisis;
 
 function analex($c3) 
 {
-global $Tokens,$TipoTokens,$final;
+	global $Tokens,$TipoTokens,$final;
+	if ($c3<$final) {
+
+		if($TipoTokens[$c3]=="Palabra reservada")
+		{
+			$preanalisis=$Tokens[$c3];
+			preanalisis2TokenId($c3);
+		}
+		else
+		{
+			$preanalisis=$TipoTokens[$c3];
+			preanalisis2TokenId($c3);
+		}
+
+		return $preanalisis;
+	}
+	else
+	{
+		echo "<br>Fin de editor<br>";
+
+	}
+
+}
 
 
-//echo "<br>variable de if es: ";
-//echo $Tokens[$c3];
-//echo "<br>variable de else: ";
-//echo "Variable en tipodeTokens";
-//echo $TipoTokens[$c3];echo "<br>";
-if ($c3<$final) {
-	# code...
-
-        if($TipoTokens[$c3]=="Palabra reservada")
-     {
-        //$preanalisis2=$lexi;
-        $preanalisis=$Tokens[$c3];
-     }
-     else
-     {
-        //$preanalisis2=$titok;
-      $preanalisis=$TipoTokens[$c3];
-     }
-     //echo "----------------->var c3: ".$c3;echo "<br>";
-     //echo "TOKENS[] ->".$Tokens[$c3]."---";
-          return $preanalisis;
-          }
-else
+function preanalisis2TokenId($c3)
 {
-echo "<br>Fin de editor<br>";
+	global $Tokens,$TipoTokens,$final,$preanalisis2;
+	if ($c3<$final) {
 
+		if($TipoTokens[$c3]=="Palabra reservada")
+		{
+			array_push($preanalisis2, array($Tokens[$c3],$TipoTokens[$c3]));
+			
+		}
+		else
+		{
+
+			array_push($preanalisis2, array($Tokens[$c3],$TipoTokens[$c3]));
+		}
+
+		return  $preanalisis2;
+	}
 }
-          
-}
+
      
 //echo "AQUI FUNCION ANAKE¡¡LEX:";
 //echo analex($c3);
 $preanalisis=analex($c3);
-//echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
+$preanalisis2=preanalisis2TokenId($c3);
+echo "<br>----------PREANALISIS2--- linea 95:<br>";
+print_r($preanalisis2);
 
 
 
@@ -135,7 +151,7 @@ $preanalisis=analex($c3);
 	}
 	function DA()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$asigVar;
 		if($preanalisis==$arreglos)
 		{	
 			emparejar($arreglos);
@@ -167,10 +183,11 @@ $preanalisis=analex($c3);
 	}
 	function DA2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$asigVar,$preanalisis3;
 		if($preanalisis=$id)
 		{
 			emparejar($id);
+			array_push($asigVar, $preanalisis2);
 			emparejar($igual);
 			emparejar($llaveA);
 			D();
@@ -658,6 +675,7 @@ $preanalisis=analex($c3);
 			$c3++;
 			$preanalisis = analex($c3);
 
+
 		}
 		else{
 			echo "->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." - ".$tok;
@@ -666,6 +684,7 @@ $preanalisis=analex($c3);
 //emparejar($preanalisis);
 	analex($c3);
 	P();
+	print_r($asigVar);
 
 
  ?>

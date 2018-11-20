@@ -1,7 +1,7 @@
 programA pares
      
 
-arreglos valores={534, 789, 212, '6', 8}
+arreglos valores={534, 789, 212, 6, 8}
      datos={'n','9','0','9'}
 	inicio 
 car='1';
