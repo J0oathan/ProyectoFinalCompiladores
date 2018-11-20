@@ -227,7 +227,7 @@ $preanalisis=analex($c3);
 			//es cadena vacia
 		}
 		else {
-			echo "->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba un identificador o inicio";
+			echo "->Error semántico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba un identificador o inicio";
 		}
 	}
 
@@ -241,7 +241,7 @@ $preanalisis=analex($c3);
 			emparejar($c); D3();
 		}
 		else {
-			echo "->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba un entero o caracter";
+			echo "->Error semántico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba un entero o caracter";
 		}
 	}
 
@@ -255,7 +255,7 @@ $preanalisis=analex($c3);
 			//cadena vacia
 		}
 		else {
-			echo "->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba , o }";
+			echo "->Error semántico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba , o }";
 		}
 	}
 
@@ -269,7 +269,7 @@ $preanalisis=analex($c3);
 			
 		}
 		else {
-			echo "->Error sintactico El token de preanalisis es: ".$preanalisis."y eesperaba , o }";
+			echo "->Error semántico El token de preanalisis es: ".$preanalisis."y eesperaba , o }";
 		}
 	}
 
