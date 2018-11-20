@@ -10,8 +10,8 @@ $TipoTokens;
 $NumLinea;
 $final=$_SESSION['variable4']; //en la posicion 0 guarde el numero de vueltas
 
-$asigVar = array();
-$preanalisis2 = array();
+$asigVar=array();
+$preanalisis2=array();
 
 /*$NumTokens=$final/3;
 echo "<b>numero de vueltas $final</b><br>";
@@ -49,12 +49,12 @@ function analex($c3)
 		if($TipoTokens[$c3]=="Palabra reservada")
 		{
 			$preanalisis=$Tokens[$c3];
-			preanalisis2TokenId($c3);
+			//$preanalisis2=preanalisis2TokenId($c3);
 		}
 		else
 		{
 			$preanalisis=$TipoTokens[$c3];
-			preanalisis2TokenId($c3);
+			$preanalisis2=preanalisis2TokenId($c3);
 		}
 
 		return $preanalisis;
@@ -75,13 +75,13 @@ function preanalisis2TokenId($c3)
 
 		if($TipoTokens[$c3]=="Palabra reservada")
 		{
-			array_push($preanalisis2, array($Tokens[$c3],$TipoTokens[$c3]));
+			//array_push($preanalisis2,$Tokens[$c3],$TipoTokens[$c3]);
 			
 		}
 		else
 		{
 
-			array_push($preanalisis2, array($Tokens[$c3],$TipoTokens[$c3]));
+			array_push($preanalisis2,$Tokens[$c3],$TipoTokens[$c3]);
 		}
 
 		return  $preanalisis2;
@@ -92,7 +92,7 @@ function preanalisis2TokenId($c3)
 //echo "AQUI FUNCION ANAKE¡¡LEX:";
 //echo analex($c3);
 $preanalisis=analex($c3);
-$preanalisis2=preanalisis2TokenId($c3);
+//$preanalisis2=preanalisis2TokenId($c3);
 echo "<br>----------PREANALISIS2--- linea 95:<br>";
 print_r($preanalisis2);
 
@@ -168,9 +168,10 @@ print_r($preanalisis2);
 	}
 	function DC2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$Tokens,$asigVar;
 		if($preanalisis==$id)
 		{
+			array_push($asigVar, $Tokens[$c3]);
 			emparejar($id);
 			emparejar($igual);
 			CONSTANTE();
@@ -183,11 +184,11 @@ print_r($preanalisis2);
 	}
 	function DA2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$asigVar,$preanalisis3;
+		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$asigVar,$preanalisis3,$Tokens;
 		if($preanalisis=$id)
 		{
+			array_push($asigVar, $Tokens[$c3]);
 			emparejar($id);
-			array_push($asigVar, $preanalisis2);
 			emparejar($igual);
 			emparejar($llaveA);
 			D();
