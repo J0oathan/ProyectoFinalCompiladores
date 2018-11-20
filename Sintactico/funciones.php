@@ -134,7 +134,7 @@ print_r($preanalisis2);
 	}
 	function DC()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if($preanalisis==$constantes)
 		{
 			emparejar($constantes);
@@ -151,7 +151,7 @@ print_r($preanalisis2);
 	}
 	function DA()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$asigVar;
+		require('globales.php');
 		if($preanalisis==$arreglos)
 		{	
 			emparejar($arreglos);
@@ -168,10 +168,12 @@ print_r($preanalisis2);
 	}
 	function DC2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$Tokens,$asigVar;
+		
+		require('globales.php');
 		if($preanalisis==$id)
 		{
-			array_push($asigVar, $Tokens[$c3]);
+			//array_push($asigVar, $Tokens[$c3]);
+			//CompararAsigVarTokens($asigVar,$Tokens);
 			emparejar($id);
 			emparejar($igual);
 			CONSTANTE();
@@ -182,9 +184,33 @@ print_r($preanalisis2);
 			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba un id<br>";
 		}
 	}
+
+	function CompararAsigVarTokens($asigVar,$Tokens)
+	{
+
+		$ciclo=count($Tokens);
+		echo "<br> ciclo vale $ciclo<br>";
+
+		for($f=0;$f<=$ciclo;$f++)
+
+		{		
+				echo "<br>comparamos ";echo $asigVar[$f]; echo " con ";echo $Tokens[$f];
+				if($asigVar[$f]==$Tokens[$f])
+				{
+						echo "<br>hacer el push<br>";
+						array_push($asigVar, $Tokens[$c3]);
+				}
+				else
+				{
+						echo "<br>no hacer push<br>";
+				}
+		}		
+
+	}
+
 	function DA2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$asigVar,$preanalisis3,$Tokens;
+		require('globales.php');
 		if($preanalisis=$id)
 		{
 			array_push($asigVar, $Tokens[$c3]);
@@ -203,7 +229,7 @@ print_r($preanalisis2);
 
 	function CONSTANTE()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if($preanalisis==$ent)
 		{
 			emparejar($ent);
@@ -222,7 +248,7 @@ print_r($preanalisis2);
 	}
 	function DC3()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if($preanalisis==$id)
 		{
 			DC2();
@@ -237,7 +263,7 @@ print_r($preanalisis2);
 	}
 	function DA3()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if ($preanalisis== $id) {
 			DA2();
 		}
@@ -251,7 +277,8 @@ print_r($preanalisis2);
 
 	function D()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
+
 		if ($preanalisis== $ent) {
 			emparejar($ent); D2();
 		}
@@ -265,7 +292,7 @@ print_r($preanalisis2);
 
 	function D2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if ($preanalisis== $coma) {
 			emparejar($coma); emparejar($ent); D2();
 		}
@@ -279,7 +306,7 @@ print_r($preanalisis2);
 
 	function D3()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if ($preanalisis== $coma) {
 			emparejar($coma); emparejar($c); D3();
 		}
@@ -293,7 +320,7 @@ print_r($preanalisis2);
 
 	function INST()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 
 		if ($preanalisis == $si) {
 			SI();
@@ -346,7 +373,8 @@ print_r($preanalisis2);
 
 	function EXPR()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
+
 		if ($preanalisis== $id) {
 			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
 		}
@@ -358,7 +386,7 @@ print_r($preanalisis2);
 
 	function EXPR2()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php'); 
 		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi ||  $preanalisis== $mod) {
 			OP(); OP1();
 		}
@@ -371,7 +399,8 @@ print_r($preanalisis2);
 	}
 	function OP()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
+
 		if($preanalisis==$mod)
 		{
 			emparejar($mod);
@@ -399,7 +428,8 @@ print_r($preanalisis2);
 	}
 	function OP1()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+			require('globales.php');
+
 		if($preanalisis==$ent||$preanalisis==$c)
 		{
 			CONSTANTE();
@@ -416,7 +446,8 @@ print_r($preanalisis2);
 	}
 	function LEE()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php'); 
+
 		if($preanalisis==$lee)
 		{
 			emparejar($lee);
@@ -434,7 +465,8 @@ print_r($preanalisis2);
 	}
 	function ESCRIBE()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php'); 
+
 		if($preanalisis==$escribe)
 		{
 			emparejar($escribe);
@@ -451,7 +483,8 @@ print_r($preanalisis2);
 	}
 	function PARA()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$hasta,$paso,$hacer;
+		require('globales.php'); 
+
 		if($preanalisis==$para)
 		{
 			emparejar($para);
@@ -474,7 +507,8 @@ print_r($preanalisis2);
 	}
 	function SI()   /////xxx
 	{
-		global $NumLinea, $c3,$programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis,$entonces;
+		require('globales.php');
+
 		if($preanalisis==$si)
 		{
 			emparejar($si);
@@ -494,7 +528,8 @@ print_r($preanalisis2);
 	}
 	function SINO() /////xxx
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
+
 		if($preanalisis==$sino)
 		{
 			emparejar($sino);
@@ -509,7 +544,8 @@ print_r($preanalisis2);
 	}
 	function LIMIT()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php'); 
+
 		if($preanalisis == $ent)
 		{
 			emparejar($ent);
@@ -527,7 +563,8 @@ print_r($preanalisis2);
 	}
 	function CONDICION()
 	{
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
+
 		if($preanalisis == $ent || $preanalisis == $c || $preanalisis == $id)
 		{
 			OP1(); SR(); OP1();
@@ -539,7 +576,8 @@ print_r($preanalisis2);
 		}
 	}
 	function INCDEC(){
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php'); 
+
 		if($preanalisis == $suma || $preanalisis == $resta)
 		{
 			OID(); emparejar($ent);
@@ -551,7 +589,8 @@ print_r($preanalisis2);
 		}
 	}
 	function OID(){
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		 
+		 require('globales.php');
 		if($preanalisis == $suma)
 		{
 			emparejar($suma);
@@ -567,7 +606,7 @@ print_r($preanalisis2);
 		}
 	}
 	function SR(){
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		if ($preanalisis == $diferente) {
 			emparejar($diferente);
 		}
@@ -589,33 +628,13 @@ print_r($preanalisis2);
 		else   {
 			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba un simbolo relacional<br>";
 		}
-		/*switch ($preanalisis) {
-			case $diferente:
-				emparejar($diferente);
-				break;
-			case $menor:
-				emparejar($menor);
-				break;
-			case $mayor:
-				emparejar($mayor);
-				break;
-			case $mayorigual:
-				emparejar($mayorigual);
-				break;
-			case $menorigual:
-				emparejar($menorigual);
-				break;
-			case $igualigual:
-				emparejar($igualigual);
-				break;
-			default:
-				echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba un simbolo relacional<br>";
-			//->ErrorSintactico($lexema,$ent,$id);
-				break;
-		}*/
+		
 	}
 	function ARR(){
-		global $punto, $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis, $length, $paso, $hasta;
+		
+
+			require('globales.php');
+
 		if($preanalisis == $corcheteA)
 		{
 			emparejar($corcheteA); LIMIT2(); emparejar($corcheteC);
@@ -637,7 +656,10 @@ print_r($preanalisis2);
 		}
 	}
 	function LIMIT2(){
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+
+			require('globales.php');
+
+
 		if($preanalisis == $ent)
 		{
 			emparejar($ent); CONDICION2(); 
@@ -653,7 +675,8 @@ print_r($preanalisis2);
 		}
 	}
 	function CONDICION2(){
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+			require('globales.php');
+
 		if($preanalisis == $mod || $preanalisis == $suma || $preanalisis == $resta || $preanalisis == $division || $preanalisis == $multi)
 		{
 			OP(); LIMIT();
