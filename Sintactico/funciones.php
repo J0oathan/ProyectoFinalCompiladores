@@ -69,7 +69,7 @@ if ($c3<$final) {
           }
 else
 {
-echo "Fin de editor";
+echo "<br>Fin de editor<br>";
 
 }
           
@@ -78,11 +78,11 @@ echo "Fin de editor";
 //echo "AQUI FUNCION ANAKE¡¡LEX:";
 //echo analex($c3);
 $preanalisis=analex($c3);
-echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
+//echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 
 
 
- echo "<BR>Imprimir haber si sirve<br>";
+ /*echo "<BR>Imprimir haber si sirve<br>";
  for($i=0;$i<$final;$i++){
   //function cicloFor($contan2,$tokens,$TipoTokens,$NumLinea,$lexi,$titok){
      // for($i=$contan2;$i<$contan2+1;$i++)
@@ -93,7 +93,7 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
      	echo $TipoTokens[$i];
      	echo "<br>NumLinea: ";
      	echo $NumLinea[$i];echo "<br><br>";
-     }
+     }*/
      function P()
 	{
 		
@@ -109,7 +109,7 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 			emparejar($inicio);
 			INST();
 			emparejar($fin);
-			echo "TERMINO DE RECORRER EL PROGRAMA";
+			echo "<br>TERMINO DE RECORRER EL PROGRAMA<br>";
 		}
 		else
 		{
@@ -403,7 +403,7 @@ echo "<br>----------PREANALISIS2: ".$preanalisis;echo"<br>";
 		{
 			emparejar($lee);
 			emparejar($parA);
-			CONSTANTE();
+			emparejar($id);
 			emparejar($parC);
 			emparejar($puntoycoma);
 			INST();
