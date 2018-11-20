@@ -6,7 +6,7 @@
 	<title></title>
 
   <?php 
-   echo "<META HTTP-EQUIV='REFRESH' CONTENT='1;URL=Sintactico/funciones.php'> </head> ";
+   echo "<META HTTP-EQUIV='REFRESH' CONTENT='1  ;URL=Sintactico/funciones.php'> </head> ";
    ?>
 	
 

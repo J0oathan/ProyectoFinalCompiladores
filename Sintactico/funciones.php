@@ -113,7 +113,7 @@ print_r($preanalisis2);
      function P()
 	{
 		
-		global $NumLinea, $c3,$entonces, $programa,$constantes,$arreglos,$inicio,$fin,$ent,$id,$c,$coma,$llaveC,$llaveA,$si,$sino,$para,$escribe,$lee,$mod,$suma,$resta,$division,$multi,$puntoycoma,$diferente,$menor,$menorigual,$mayor,$mayorigual,$igualigual,$corcheteA,$corcheteC,$igual,$parA,$parC,$preanalisis2,$preanalisis;
+		require('globales.php');
 		//echo "<br>PREANAL: ".$preanalisis." y programa ".$programa;
 		//echo "funcion P:".$preanalisis;
 		if($preanalisis==$programa)
@@ -173,7 +173,8 @@ print_r($preanalisis2);
 		if($preanalisis==$id)
 		{
 			//array_push($asigVar, $Tokens[$c3]);
-			//CompararAsigVarTokens($asigVar,$Tokens);
+			//echo "<br>vemos que hay  ";echo $asigVar[0]; echo " con ";echo $Tokens[0];
+			CompararAsigVarTokens($asigVar,$Tokens);
 			emparejar($id);
 			emparejar($igual);
 			CONSTANTE();
@@ -187,24 +188,37 @@ print_r($preanalisis2);
 
 	function CompararAsigVarTokens($asigVar,$Tokens)
 	{
+		require('globales.php');
 
-		$ciclo=count($Tokens);
-		echo "<br> ciclo vale $ciclo<br>";
+		$ciclo=count($asigVar);
+		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
 
 		for($f=0;$f<=$ciclo;$f++)
 
-		{		
-				echo "<br>comparamos ";echo $asigVar[$f]; echo " con ";echo $Tokens[$f];
-				if($asigVar[$f]==$Tokens[$f])
+		{			
+
+
+				echo "<br><b> f vale $f</b> <br>";
+				if(empty($asigVar[$f]))
 				{
-						echo "<br>hacer el push<br>";
+					echo "<br>esta vacio asignamos el token es -";
+					echo $Tokens[$c3];
+					echo "-<br>";
+					array_push($asigVar, $Tokens[$c3]);
+				}
+				else if($asigVar[$f]==$Tokens[$c3])
+				{		
+						echo "<br>comparamos ";echo $asigVar[$f]; echo " con ";echo $Tokens[$c3];
+						echo "<br>hacer el push son iguales<br>";
 						array_push($asigVar, $Tokens[$c3]);
 				}
 				else
 				{
 						echo "<br>no hacer push<br>";
 				}
-		}		
+		}	
+
+		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
 
 	}
 
@@ -213,7 +227,8 @@ print_r($preanalisis2);
 		require('globales.php');
 		if($preanalisis=$id)
 		{
-			array_push($asigVar, $Tokens[$c3]);
+			//array_push($asigVar, $Tokens[$c3]);
+			CompararAsigVarTokens($asigVar,$Tokens);
 			emparejar($id);
 			emparejar($igual);
 			emparejar($llaveA);
