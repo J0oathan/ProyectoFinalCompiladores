@@ -10,7 +10,11 @@ $TipoTokens;
 $NumLinea;
 $final=$_SESSION['variable4']; //en la posicion 0 guarde el numero de vueltas
 
-$asigVar=array();
+
+$arrEnt=array();
+$arrCar=array();
+$aArrEnt=array();
+$aArrCar=array();
 $preanalisis2=array();
 
 /*$NumTokens=$final/3;
@@ -93,8 +97,7 @@ function preanalisis2TokenId($c3)
 //echo analex($c3);
 $preanalisis=analex($c3);
 //$preanalisis2=preanalisis2TokenId($c3);
-echo "<br>----------PREANALISIS2--- linea 95:<br>";
-print_r($preanalisis2);
+
 
 
 
@@ -174,7 +177,9 @@ print_r($preanalisis2);
 		{
 			//array_push($asigVar, $Tokens[$c3]);
 			//echo "<br>vemos que hay  ";echo $asigVar[0]; echo " con ";echo $Tokens[0];
-			CompararAsigVarTokens($asigVar,$Tokens);
+			//CompararAsigVarTokens($asigVar,$Tokens);
+			$varCons=$Tokens[$c3];
+			echo "DC2 varCons".$varCons;
 			emparejar($id);
 			emparejar($igual);
 			CONSTANTE();
@@ -186,35 +191,143 @@ print_r($preanalisis2);
 		}
 	}
 
-	function CompararAsigVarTokens($asigVar,$Tokens)
+	
+
+	//funcion arreglo de constantes de enteros
+	function ArrConsEnt($arrEnt,$varCons)
 	{
 		require('globales.php');
 
-		$ciclo=count($asigVar);
+		$ciclo=count($arrEnt);
 		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
-
-		for($f=0;$f<=$ciclo;$f++)
-
-		{			
+		
 
 
-				echo "<br><b> f vale $f</b> <br>";
-				if(empty($asigVar[$f]))
-				{
-					echo "<br>esta vacio asignamos el token es -";
-					echo $Tokens[$c3];
-					echo "-<br>";
-					array_push($asigVar, $Tokens[$c3]);
-				}
-				else if($asigVar[$f]==$Tokens[$c3])
-				{		
-						echo "<br>comparamos ";echo $asigVar[$f]; echo " con ";echo $Tokens[$c3];
-						echo "<br>hacer el push son iguales<br>";
-						array_push($asigVar, $Tokens[$c3]);
+		if(empty($arrEnt))
+		{
+			echo "<br>esta vacio asignamos el token es -";
+			echo $varCons;
+			echo "-<br>";
+			array_push($arrEnt, $varCons);
+		}
+		else
+		{
+
+			
+				
+			
+				if(in_array($varCons, $arrEnt))
+				{	
+						
+					echo "<br>no hacer push<br>";
 				}
 				else
 				{
-						echo "<br>no hacer push<br>";
+
+					
+					echo "<br>hacer el push no son iguales<br>";
+					array_push($arrEnt, $varCons);
+				}
+			
+
+		}	
+
+		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
+
+	}
+
+	//funcion arreglo de constantes de caracter
+	function ArrConsCar($arrCar,$varCons)
+	{
+		require('globales.php');
+
+		$ciclo=count($arrCar);
+		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
+		if(empty($arrCar))
+		{
+			echo "<br>esta vacio asignamos el token es -";
+			echo $varCons;
+			echo "-<br>";
+			array_push($arrCar, $varCons);
+		}
+		else
+		{
+
+				if(in_array($varCons, $arrCar))
+				{	
+					echo "<br>no hacer push<br>";
+				}
+				else
+				{
+					echo "<br>hacer el push no son iguales<br>";
+					array_push($arrCar, $varCons);
+				}
+		}	
+
+		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
+
+	}
+//funcion arreglo de arreglos de enteros
+	function ArrArrEnt($aArrEnt,$Tokens)
+	{
+		require('globales.php');
+
+		$ciclo=count($aArrEnt);
+		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
+		if(empty($aArrEnt))
+		{
+			echo "<br>esta vacio asignamos el token es -";
+			echo $Tokens[$c3];
+			echo "-<br>";
+			array_push($aArrEnt, $Tokens[$c3]);
+		}
+		else
+		{		
+				if(in_array($Tokens[$c3], $aArrEnt))
+				{	
+						
+					echo "<br>no hacer push<br>";
+				}
+				else
+				{
+
+					
+					echo "<br>hacer el push no son iguales<br>";
+					array_push($aArrEnt, $Tokens[$c3]);
+				}
+		}	
+
+		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
+
+	}
+
+	//funcion arreglo de arreglos de caracteres
+	function ArrArrCar($aArrCar,$Tokens)
+	{
+		require('globales.php');
+
+		$ciclo=count($aArrCar);
+		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
+		if(empty($aArrCar))
+		{
+			echo "<br>esta vacio asignamos el token es -";
+			echo $Tokens[$c3];
+			echo "-<br>";
+			array_push($aArrCar, $Tokens[$c3]);
+		}
+		else
+		{		
+				if(in_array($Tokens[$c3], $aArrCar))
+				{	
+						
+					echo "<br>no hacer push<br>";
+				}
+				else
+				{
+
+					
+					echo "<br>hacer el push no son iguales<br>";
+					array_push($aArrCar, $Tokens[$c3]);
 				}
 		}	
 
@@ -228,7 +341,7 @@ print_r($preanalisis2);
 		if($preanalisis=$id)
 		{
 			//array_push($asigVar, $Tokens[$c3]);
-			CompararAsigVarTokens($asigVar,$Tokens);
+			//CompararAsigVarTokens($asigVar,$Tokens);
 			emparejar($id);
 			emparejar($igual);
 			emparejar($llaveA);
@@ -247,11 +360,13 @@ print_r($preanalisis2);
 		require('globales.php');
 		if($preanalisis==$ent)
 		{
+			ArrConsEnt($varCons,$arrEnt);
 			emparejar($ent);
 
 		}
 		else if($preanalisis==$c)
 		{
+			ArrConsCar($varCons,$arrCar);
 			emparejar($c);
 		}
 		else
@@ -391,6 +506,7 @@ print_r($preanalisis2);
 		require('globales.php');
 
 		if ($preanalisis== $id) {
+			//CompararAsigVarTokens($asigVar,$Tokens);
 			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
 		}
 		
@@ -723,7 +839,8 @@ print_r($preanalisis2);
 //emparejar($preanalisis);
 	analex($c3);
 	P();
-	print_r($asigVar);
+	print_r($arrEnt);
+	print_r($arrCar);
 
 
  ?>

@@ -1,6 +1,8 @@
 programA pares
      
 constantes x=2
+x2='2'
+
 arreglos valores={534, 789, 212, 6, 8}
      datos={'n','9','0','9'}
 	inicio 
