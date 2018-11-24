@@ -182,6 +182,11 @@ $preanalisis=analex($c3);
 			echo "DC2 varCons".$varCons;
 			emparejar($id);
 			emparejar($igual);
+			if ($preanalisis==$ent) {
+				ArrConsEnt($arrEnt,$varCons);}
+				else if($preanalisis==$c){
+					ArrConsCar($arrCar,$varCons);
+				}
 			CONSTANTE();
 			DC3();
 		}
@@ -191,18 +196,12 @@ $preanalisis=analex($c3);
 		}
 	}
 
-	
-
-	//funcion arreglo de constantes de enteros
 	function ArrConsEnt($arrEnt,$varCons)
 	{
 		require('globales.php');
 
 		$ciclo=count($arrEnt);
 		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
-		
-
-
 		if(empty($arrEnt))
 		{
 			echo "<br>esta vacio asignamos el token es -";
@@ -213,29 +212,22 @@ $preanalisis=analex($c3);
 		else
 		{
 
-			
-				
-			
 				if(in_array($varCons, $arrEnt))
 				{	
-						
 					echo "<br>no hacer push<br>";
+					echo "<br>".$varCons."-->Car <br>";
 				}
 				else
 				{
-
-					
 					echo "<br>hacer el push no son iguales<br>";
+					echo "<br>".$varCons."-->Car<br>";
 					array_push($arrEnt, $varCons);
 				}
-			
-
 		}	
 
 		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
 
 	}
-
 	//funcion arreglo de constantes de caracter
 	function ArrConsCar($arrCar,$varCons)
 	{
@@ -256,10 +248,12 @@ $preanalisis=analex($c3);
 				if(in_array($varCons, $arrCar))
 				{	
 					echo "<br>no hacer push<br>";
+					echo "<br>".$varCons."-->Car <br>";
 				}
 				else
 				{
 					echo "<br>hacer el push no son iguales<br>";
+					echo "<br>".$varCons."-->Car<br>";
 					array_push($arrCar, $varCons);
 				}
 		}	
@@ -268,7 +262,7 @@ $preanalisis=analex($c3);
 
 	}
 //funcion arreglo de arreglos de enteros
-	function ArrArrEnt($aArrEnt,$Tokens)
+	function ArrArrEnt($aArrEnt,$varCons)
 	{
 		require('globales.php');
 
@@ -277,13 +271,13 @@ $preanalisis=analex($c3);
 		if(empty($aArrEnt))
 		{
 			echo "<br>esta vacio asignamos el token es -";
-			echo $Tokens[$c3];
+			echo $varCons;
 			echo "-<br>";
-			array_push($aArrEnt, $Tokens[$c3]);
+			array_push($aArrEnt, $varCons);
 		}
 		else
 		{		
-				if(in_array($Tokens[$c3], $aArrEnt))
+				if(in_array($varCons, $aArrEnt))
 				{	
 						
 					echo "<br>no hacer push<br>";
@@ -293,7 +287,7 @@ $preanalisis=analex($c3);
 
 					
 					echo "<br>hacer el push no son iguales<br>";
-					array_push($aArrEnt, $Tokens[$c3]);
+					array_push($aArrEnt, $varCons);
 				}
 		}	
 
@@ -302,7 +296,7 @@ $preanalisis=analex($c3);
 	}
 
 	//funcion arreglo de arreglos de caracteres
-	function ArrArrCar($aArrCar,$Tokens)
+	function ArrArrCar($aArrCar,$varCons)
 	{
 		require('globales.php');
 
@@ -311,13 +305,13 @@ $preanalisis=analex($c3);
 		if(empty($aArrCar))
 		{
 			echo "<br>esta vacio asignamos el token es -";
-			echo $Tokens[$c3];
+			echo $varCons;
 			echo "-<br>";
-			array_push($aArrCar, $Tokens[$c3]);
+			array_push($aArrCar, $varCons);
 		}
 		else
 		{		
-				if(in_array($Tokens[$c3], $aArrCar))
+				if(in_array($varCons, $aArrCar))
 				{	
 						
 					echo "<br>no hacer push<br>";
@@ -327,7 +321,7 @@ $preanalisis=analex($c3);
 
 					
 					echo "<br>hacer el push no son iguales<br>";
-					array_push($aArrCar, $Tokens[$c3]);
+					array_push($aArrCar, $varCons);
 				}
 		}	
 
@@ -342,9 +336,16 @@ $preanalisis=analex($c3);
 		{
 			//array_push($asigVar, $Tokens[$c3]);
 			//CompararAsigVarTokens($asigVar,$Tokens);
+			$varCons=$Tokens[$c3];
+			echo $varCons;
 			emparejar($id);
 			emparejar($igual);
 			emparejar($llaveA);
+			if ($preanalisis==$ent) {
+				ArrArrEnt($aArrEnt,$varCons);}
+				else if($preanalisis==$c){
+					ArrArrCar($aArrCar,$varCons);
+				}
 			D();
 			emparejar($llaveC);
 			DA3();
@@ -360,13 +361,13 @@ $preanalisis=analex($c3);
 		require('globales.php');
 		if($preanalisis==$ent)
 		{
-			ArrConsEnt($varCons,$arrEnt);
+			//ArrConsEnt($varCons,$arrEnt);
 			emparejar($ent);
 
 		}
 		else if($preanalisis==$c)
 		{
-			ArrConsCar($varCons,$arrCar);
+			//ArrConsCar($varCons,$arrCar);
 			emparejar($c);
 		}
 		else
@@ -839,8 +840,11 @@ $preanalisis=analex($c3);
 //emparejar($preanalisis);
 	analex($c3);
 	P();
+	//array_pop($arrEnt);
 	print_r($arrEnt);
 	print_r($arrCar);
+	print_r($aArrEnt);
+	print_r($aArrCar);
 
 
  ?>
