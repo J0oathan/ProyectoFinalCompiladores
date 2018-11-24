@@ -183,10 +183,12 @@ $preanalisis=analex($c3);
 			emparejar($id);
 			emparejar($igual);
 			if ($preanalisis==$ent) {
-				ArrConsEnt($arrEnt,$varCons);}
-				else if($preanalisis==$c){
-					ArrConsCar($arrCar,$varCons);
-				}
+				tConstantes($ent,$varCons);
+				//ArrConsEnt($arrEnt,$varCons);}
+			else if($preanalisis==$c){
+				tConstantes($c,$varCons);
+					//ArrConsCar($arrCar,$varCons);
+			}
 			CONSTANTE();
 			DC3();
 		}
@@ -195,10 +197,75 @@ $preanalisis=analex($c3);
 			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba un id<br>";
 		}
 	}
+//QUERYS
+/*
+//select antes de insertar
+$selectCons="SELECT * FROM constantes WHERE lexema='".$newLexema."'";
+$selectARR ="SELECT * FROM arreglos WHERE lexema='".$newLexema."'";
 
-	function ArrConsEnt($arrEnt,$varCons)
+//insertar en la tablas CONSTANTES, ARREGLOS
+$insertCons="INSERT INTO constantes(lexema,tipo) VALUES ('".$lexema."','".$tipo."')";
+$insertArr ="INSERT INTO arreglos(lexema,tipo) VALUES ('".$lexema."','".$tipo."')";
+
+//insertar tabla VALORESARR
+$updateArr ="INSERT INTO valoresA(id_arreglo,valor) VALUES ('".$id_arreglo."','".$valor."')";
+
+//actualizar tabla CONSTANTES
+$updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema."'";
+*/
+	function tConstantes($varTipo,$varCons)
 	{
 		require('globales.php');
+		$selectCons="SELECT * FROM constantes WHERE lexema='".$varCons."'";
+		$result=mysql_query($con,$selectCons);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['lexema'];
+		if($var==$varCons) //si se encuentran resultados
+		{	
+			echo "<br>no hacer push<br>";
+			echo "<br>".$varCons."-->Car <br>";
+			echo "<br>Error Semántico. La variable ya ha sido declarada<br>";
+		}
+		else
+		{
+			echo "<br>hacer el push no son iguales<br>";
+			echo "<br>".$varCons."-->Car<br>";
+			$insertCons="INSERT INTO constantes(lexema,tipo) VALUES ('".$varCons."','".$varTipo."')";
+			$result2=mysql_query($insertCons);
+		}
+	}
+	function actCons($valor,$varCons)
+	{
+		require('globales.php');
+		$updateCons="UPDATE constantes SET valor='".$valor."' WHERE lexema='".$varCons."'";
+		$result=mysql_query($con,$updateCons);
+	}
+	/*function tArreglos($varTipo,$varCons)
+	{
+		require('globales.php');
+		$selectCons="SELECT * FROM constantes WHERE lexema='".$newLexema."'";
+		$result=mysql_query($result);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['lexema'];
+		if($var==$varCons) //si se encuentran resultados
+		{	
+			echo "<br>no hacer push<br>";
+			echo "<br>".$varCons."-->Car <br>";
+			echo "<br>Error Semántico. La variable ya ha sido declarada<br>";
+		}
+		else
+		{
+			echo "<br>hacer el push no son iguales<br>";
+			echo "<br>".$varCons."-->Car<br>";
+			$insertCons="INSERT INTO constantes(lexema,tipo) VALUES ('".$varCons."','".$varTipo."')";
+			$result2=mysql_query($insertCons);
+		}
+	}*/
+
+	/*function ArrConsEnt($arrEnt,$varCons)
+	{
+		require('globales.php');
+
 
 		$ciclo=count($arrEnt);
 		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
@@ -226,8 +293,9 @@ $preanalisis=analex($c3);
 		}	
 
 		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
+		
 
-	}
+	}*/
 	//funcion arreglo de constantes de caracter
 	function ArrConsCar($arrCar,$varCons)
 	{
@@ -361,12 +429,13 @@ $preanalisis=analex($c3);
 		require('globales.php');
 		if($preanalisis==$ent)
 		{
+			actCons($Tokens[$c3],$varCons);
 			//ArrConsEnt($varCons,$arrEnt);
 			emparejar($ent);
 
 		}
 		else if($preanalisis==$c)
-		{
+		{	actCons($Tokens[$c3],$varCons);
 			//ArrConsCar($varCons,$arrCar);
 			emparejar($c);
 		}
