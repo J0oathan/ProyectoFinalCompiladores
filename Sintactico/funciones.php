@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+include 'conexion.php';
 //$preanalisis=$_SESSION['preanalisis'];
 //echo "PREANAL ".$preanalisis;
 //include('analex.php');
@@ -182,13 +183,8 @@ $preanalisis=analex($c3);
 			echo "DC2 varCons".$varCons;
 			emparejar($id);
 			emparejar($igual);
-			if ($preanalisis==$ent) {
-				tConstantes($ent,$varCons);
-				//ArrConsEnt($arrEnt,$varCons);}
-			else if($preanalisis==$c){
-				tConstantes($c,$varCons);
-					//ArrConsCar($arrCar,$varCons);
-			}
+			$varTipo=$preanalisis;
+			tConstantes($varTipo,$varCons);
 			CONSTANTE();
 			DC3();
 		}
@@ -216,29 +212,44 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 	function tConstantes($varTipo,$varCons)
 	{
 		require('globales.php');
+		require 'conexion.php';
 		$selectCons="SELECT * FROM constantes WHERE lexema='".$varCons."'";
-		$result=mysql_query($con,$selectCons);
+		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		//$result=mysqli_query($con,$sql) or die("consulta fallida").mysqli_error($con);
+		$result=$con->query($sql);
 		$row=mysqli_fetch_assoc($result);
 		$var=$row['lexema'];
+		echo $var."variable";
+		$con->close();
+		
 		if($var==$varCons) //si se encuentran resultados
 		{	
 			echo "<br>no hacer push<br>";
 			echo "<br>".$varCons."-->Car <br>";
+
+			echo "<br>".$varTipo."-->cvrTipo<br>";
 			echo "<br>Error Semántico. La variable ya ha sido declarada<br>";
 		}
 		else
 		{
 			echo "<br>hacer el push no son iguales<br>";
 			echo "<br>".$varCons."-->Car<br>";
-			$insertCons="INSERT INTO constantes(lexema,tipo) VALUES ('".$varCons."','".$varTipo."')";
-			$result2=mysql_query($insertCons);
+			echo "<br>".$varTipo."-->varTipo<br>";
+			//$insertCons="INSERT INTO constantes(lexema,tipo) VALUES ('".$varCons."','".$varTipo."')";
+			$sql = 'INSERT INTO constantes(lexema,tipo) VALUES ("'.$varCons.'","'.$varTipo.'")' ;
+			//$result2=mysqli_query($con,$insertCons);
+			$con->query($sql);
+			$con->close();
+
 		}
 	}
 	function actCons($valor,$varCons)
 	{
 		require('globales.php');
 		$updateCons="UPDATE constantes SET valor='".$valor."' WHERE lexema='".$varCons."'";
-		$result=mysql_query($con,$updateCons);
+		//$result=mysqli_query($con,$updateCons);
+		$con->query($sql);
+		$con->close();
 	}
 	/*function tArreglos($varTipo,$varCons)
 	{
@@ -429,15 +440,17 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		require('globales.php');
 		if($preanalisis==$ent)
 		{
-			actCons($Tokens[$c3],$varCons);
+			
 			//ArrConsEnt($varCons,$arrEnt);
 			emparejar($ent);
+			actCons($Tokens[$c3],$varCons);
 
 		}
 		else if($preanalisis==$c)
-		{	actCons($Tokens[$c3],$varCons);
+		{	
 			//ArrConsCar($varCons,$arrCar);
 			emparejar($c);
+			actCons($Tokens[$c3],$varCons);
 		}
 		else
 		{
