@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 $con = mysqli_connect("localhost", "root", "")or die("Erorr con mysqli_Connect");
 mysqli_select_db($con,"compiladores")or die("Erorr seleccionar DB");
 

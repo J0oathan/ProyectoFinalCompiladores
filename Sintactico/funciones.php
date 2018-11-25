@@ -180,12 +180,14 @@ $preanalisis=analex($c3);
 			//echo "<br>vemos que hay  ";echo $asigVar[0]; echo " con ";echo $Tokens[0];
 			//CompararAsigVarTokens($asigVar,$Tokens);
 			$varCons=$Tokens[$c3];
-			echo "DC2 varCons".$varCons;
+			echo "DC2 varCons = ".$varCons;echo "  ->";
 			emparejar($id);
 			emparejar($igual);
 			$varTipo=$preanalisis;
 			tConstantes($varTipo,$varCons);
+		
 			CONSTANTE();
+		
 			DC3();
 		}
 		else
@@ -219,7 +221,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		$result=$con->query($sql);
 		$row=mysqli_fetch_assoc($result);
 		$var=$row['lexema'];
-		echo $var."variable";
+		echo $var." variable";
 
 		
 		if($var==$varCons) //si se encuentran resultados
@@ -243,14 +245,22 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			
 
 		}
-
+		
 	}
 	function actCons($valor,$varCons)
 	{
+
+		include('conexion.php');
+
 		require('globales.php');
-		$updateCons="UPDATE constantes SET valor='".$valor."' WHERE lexema='".$varCons."'";
-		//$result=mysqli_query($con,$updateCons);
-		$con->query($sql);
+
+		//echo "<br>valor es --$valor-- y varconss --$varCons-- <br>";
+		$updateCons="UPDATE constantes SET valor='$valor' WHERE lexema='$varCons' ";
+
+		
+
+		//echo "<br>$updateCons<br>";
+		$con->query($updateCons);
 		
 		
 	}
@@ -440,17 +450,22 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 	function CONSTANTE()
 	{
+
+		//echo "entro a constantes";
 		require('globales.php');
 		if($preanalisis==$ent)
 		{
 			
 			//ArrConsEnt($varCons,$arrEnt);
+			$valor=$Tokens[$c3];
 			emparejar($ent);
-			actCons($Tokens[$c3],$varCons);
+			actCons($valor,$varCons);
 
 		}
 		else if($preanalisis==$c)
 		{	
+			$valor=$Tokens[$c3];
+			
 			//ArrConsCar($varCons,$arrCar);
 			emparejar($c);
 			actCons($Tokens[$c3],$varCons);
@@ -460,6 +475,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba un entero o caracter<br>";
 
 		}
+
+		
 
 	}
 	function DC3()
@@ -911,16 +928,19 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 	function emparejar($tok)
 	{
 
+
+
 		global $NumLinea, $preanalisis,$c3;
 		if ($tok == $preanalisis) {
 			$c3++;
 			$preanalisis = analex($c3);
-
+				
 
 		}
 		else{
 			echo "->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." - ".$tok;
 		}
+		
 	}
 //emparejar($preanalisis);
 	analex($c3);
