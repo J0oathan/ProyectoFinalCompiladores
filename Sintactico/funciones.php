@@ -326,6 +326,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		$result=$con->query($sql);
 		$row=mysqli_fetch_assoc($result);
 		$var=$row['lexema'];
+		$tipovar=$row['tipo'];
+
 		echo "<br>".$varCons."variable varCons de la consulta constantes<br>";
 		echo "<br>";
 		echo $var." variable  var de la consulta constantes<br>";
@@ -333,6 +335,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		$result2=$con->query($selectARR);
 		$row2=mysqli_fetch_assoc($result2);
 		$var2=$row2['lexema'];
+		$tipovar2=$row2['tipo'];
 		echo "<br>".$varCons."variable varCons de la consulta arreglos<br>";
 		echo "<br>";
 		echo $var2." variable  var2 de la consulta arreglos<br>";
@@ -351,7 +354,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			echo "<br>".$varCons."-->varcons  else <br>";
 			echo "<br>".$var."-->var if  <br>";
 			echo "<br>".$var2."-->var2 if  <br>";
-			echo "<br>Error Semántico. La variable no ha sido declarada en Verificar<br>";
+			echo "<br>Error Semántico. La variable ".$varCons." no ha sido declarada en Verificar<br>";
 			die();
 		}
 
@@ -585,6 +588,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 		if ($preanalisis== $id) {
 			//CompararAsigVarTokens($asigVar,$Tokens);
+			$varCons=$Tokens[$c3];
+			verificar($varCons);
 			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
 		}
 		
@@ -645,6 +650,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		}
 		else if($preanalisis==$id)
 		{
+			$varCons=$Tokens[$c3];
+			verificar($varCons);
 			emparejar($id); ARR();
 		}
 		else
@@ -700,6 +707,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		if($preanalisis==$para)
 		{
 			emparejar($para);
+			$varCons=$Tokens[$c3];
+			verificar($varCons);
 			emparejar($id);
 			emparejar($igual);
 			LIMIT();
@@ -764,6 +773,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		}
 		else if($preanalisis == $id)
 		{
+			$varCons=$Tokens[$c3];
+			verificar($varCons);
 			emparejar($id);
 			ARR();
 		}
@@ -878,6 +889,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		}
 		else if($preanalisis == $id)
 		{
+			$varCons=$Tokens[$c3];
+			verificar($varCons);
 			emparejar($id); CONDICION2(); 
 		}
 		else
@@ -920,6 +933,20 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		}
 		
 	}
+
+	//funcion que va a vaciar la DB
+	function TRUNCDB()
+	{
+		require 'conexion.php';
+		//esto debe llevar rel query pero no se como jajaja
+/*
+		SET FOREIGN_KEY_CHECKS=0;
+		TRUNCATE TABLE constantes;
+		TRUNCATE TABLE arreglos;
+		TRUNCATE TABLE valoresa;
+		SET FOREIGN_KEY_CHECKS=1		*/
+	}
+
 //emparejar($preanalisis);
 	//llamar función que hago truncate all a la DB
 	analex($c3);
