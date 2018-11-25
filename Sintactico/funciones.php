@@ -220,7 +220,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		$row=mysqli_fetch_assoc($result);
 		$var=$row['lexema'];
 		echo $var."variable";
-		$con->close();
+
 		
 		if($var==$varCons) //si se encuentran resultados
 		{	
@@ -239,9 +239,11 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			$sql = 'INSERT INTO constantes(lexema,tipo) VALUES ("'.$varCons.'","'.$varTipo.'")' ;
 			//$result2=mysqli_query($con,$insertCons);
 			$con->query($sql);
-			$con->close();
+			
+			
 
 		}
+
 	}
 	function actCons($valor,$varCons)
 	{
@@ -249,7 +251,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		$updateCons="UPDATE constantes SET valor='".$valor."' WHERE lexema='".$varCons."'";
 		//$result=mysqli_query($con,$updateCons);
 		$con->query($sql);
-		$con->close();
+		
+		
 	}
 	/*function tArreglos($varTipo,$varCons)
 	{
