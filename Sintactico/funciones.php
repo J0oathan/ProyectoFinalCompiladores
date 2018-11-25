@@ -317,6 +317,46 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		
 		
 	}
+
+	function verificar($varCons)
+	{
+		require('globales.php');
+		require 'conexion.php';
+		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$result=$con->query($sql);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['lexema'];
+		echo "<br>".$varCons."variable varCons de la consulta constantes<br>";
+		echo "<br>";
+		echo $var." variable  var de la consulta constantes<br>";
+		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
+		$result2=$con->query($selectARR);
+		$row2=mysqli_fetch_assoc($result2);
+		$var2=$row2['lexema'];
+		echo "<br>".$varCons."variable varCons de la consulta arreglos<br>";
+		echo "<br>";
+		echo $var2." variable  var2 de la consulta arreglos<br>";
+		
+		if($var==$varCons || $var2==$varCons) //si se encuentran resultados
+		{	
+
+			
+			echo "<br>".$varCons."-->varCons if  <br>";
+			echo "<br>".$var."-->var if  <br>";
+			echo "<br>".$var2."-->var2 if  <br>";
+			echo "<br>Ejecutar gráfico función a realizar <br>";
+			
+		}
+		else{
+			echo "<br>".$varCons."-->varcons  else <br>";
+			echo "<br>".$var."-->var if  <br>";
+			echo "<br>".$var2."-->var2 if  <br>";
+			echo "<br>Error Semántico. La variable no ha sido declarada en Verificar<br>";
+			die();
+		}
+
+		
+	}
 	/*function ArrConsEnt($arrEnt,$varCons)
 	{
 		require('globales.php');
@@ -619,8 +659,11 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 		if($preanalisis==$lee)
 		{
+
 			emparejar($lee);
 			emparejar($parA);
+			$varCons=$Tokens[$c3];
+			verificar($varCons);
 			emparejar($id);
 			emparejar($parC);
 			emparejar($puntoycoma);
@@ -878,13 +921,10 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		
 	}
 //emparejar($preanalisis);
+	//llamar función que hago truncate all a la DB
 	analex($c3);
 	P();
-	//array_pop($arrEnt);
-	print_r($arrEnt);
-	print_r($arrCar);
-	print_r($aArrEnt);
-	print_r($aArrCar);
+
 
 
  ?>
