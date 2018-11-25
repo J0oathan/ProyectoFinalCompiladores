@@ -360,6 +360,55 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 		
 	}
+
+/////////////verificar limit2
+
+function verificarlim2($varCons)
+	{
+		require('globales.php');
+		require 'conexion.php';
+		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$result=$con->query($sql);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['lexema'];
+		$tipovar=$row['tipo'];
+
+		echo "<br>".$varCons."variable varCons de la consulta constantes<br>";
+		echo "<br>";
+		echo $var." variable  var de la consulta constantes<br>";
+		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
+		$result2=$con->query($selectARR);
+		$row2=mysqli_fetch_assoc($result2);
+		$var2=$row2['lexema'];
+		$tipovar2=$row2['tipo'];
+		echo "<br>".$varCons."variable varCons de la consulta arreglos<br>";
+		echo "<br>";
+		echo $var2." variable  var2 de la consulta arreglos<br>";
+		
+		if(($var==$varCons && $tipovar==$ent) || ($var2==$varCons && $tipovar==$ent)) //si se encuentran resultados
+		{	
+
+			
+			echo "<br>".$varCons."-->varCons if  <br>";
+			echo "<br>".$var."-->var if  <br>";
+			echo "<br>".$var2."-->var2 if  <br>";
+			echo "<br>Ejecutar gráfico función a realizar <br>";
+			
+		}
+		else{
+			echo "<br>".$varCons."-->varcons  else <br>";
+			echo "<br>".$var."-->var if  <br>";
+			echo "<br>".$var2."-->var2 if  <br>";
+			echo "<br>Error Semántico. La variable ".$varCons." no ha sido declarada en Verificar o no es entero<br>";
+			die();
+		}
+
+		
+	}
+
+
+
+
 	/*function ArrConsEnt($arrEnt,$varCons)
 	{
 		require('globales.php');
@@ -440,6 +489,37 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			//ArrConsCar($varCons,$arrCar);
 			emparejar($c);
 			actCons($Tokens[$c3],$varCons);
+		}
+		else
+		{
+			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba un entero o caracter<br>";
+
+		}
+
+		
+
+	}
+	function CONSTANTE2()
+	{
+
+		//echo "entro a constantes";
+		require('globales.php');
+		if($preanalisis==$ent)
+		{
+			
+			//ArrConsEnt($varCons,$arrEnt);
+			$valor=$Tokens[$c3];
+			emparejar($ent);
+			
+
+		}
+		else if($preanalisis==$c)
+		{	
+			$valor=$Tokens[$c3];
+			
+			//ArrConsCar($varCons,$arrCar);
+			emparejar($c);
+			
 		}
 		else
 		{
@@ -589,6 +669,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		if ($preanalisis== $id) {
 			//CompararAsigVarTokens($asigVar,$Tokens);
 			$varCons=$Tokens[$c3];
+			$varExpr= $Tokens[$c3];
 			verificar($varCons);
 			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
 		}
@@ -646,7 +727,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 		if($preanalisis==$ent||$preanalisis==$c)
 		{
-			CONSTANTE();
+			CONSTANTE2();
 		}
 		else if($preanalisis==$id)
 		{
@@ -774,7 +855,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		else if($preanalisis == $id)
 		{
 			$varCons=$Tokens[$c3];
-			verificar($varCons);
+			verificarlim2($varCons);
 			emparejar($id);
 			ARR();
 		}
@@ -890,7 +971,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		else if($preanalisis == $id)
 		{
 			$varCons=$Tokens[$c3];
-			verificar($varCons);
+			verificarlim2($varCons);
 			emparejar($id); CONDICION2(); 
 		}
 		else
