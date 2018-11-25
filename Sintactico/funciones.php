@@ -215,7 +215,6 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 	{
 		require('globales.php');
 		require 'conexion.php';
-		$selectCons="SELECT * FROM constantes WHERE lexema='".$varCons."'";
 		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
 		//$result=mysqli_query($con,$sql) or die("consulta fallida").mysqli_error($con);
 		$result=$con->query($sql);
@@ -231,6 +230,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 			echo "<br>".$varTipo."-->cvrTipo<br>";
 			echo "<br>Error Semántico. La variable ya ha sido declarada<br>";
+			die();
 		}
 		else
 		{
@@ -253,9 +253,11 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		include('conexion.php');
 
 		require('globales.php');
+		
 
 		//echo "<br>valor es --$valor-- y varconss --$varCons-- <br>";
-		$updateCons="UPDATE constantes SET valor='$valor' WHERE lexema='$varCons' ";
+		$valor1 = str_replace("'", " ", $valor );
+		$updateCons="UPDATE constantes SET valor='$valor1' WHERE lexema='$varCons' ";
 
 		
 
@@ -264,28 +266,57 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		
 		
 	}
-	/*function tArreglos($varTipo,$varCons)
+	function tArreglos($varTipo,$varCons)
 	{
 		require('globales.php');
-		$selectCons="SELECT * FROM constantes WHERE lexema='".$newLexema."'";
-		$result=mysql_query($result);
+		include('conexion.php');
+		//$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
+		$result=$con->query($selectARR);
 		$row=mysqli_fetch_assoc($result);
 		$var=$row['lexema'];
+		echo $var." variable";
+
+
 		if($var==$varCons) //si se encuentran resultados
 		{	
 			echo "<br>no hacer push<br>";
 			echo "<br>".$varCons."-->Car <br>";
 			echo "<br>Error Semántico. La variable ya ha sido declarada<br>";
+			die();
 		}
 		else
 		{
 			echo "<br>hacer el push no son iguales<br>";
 			echo "<br>".$varCons."-->Car<br>";
-			$insertCons="INSERT INTO constantes(lexema,tipo) VALUES ('".$varCons."','".$varTipo."')";
-			$result2=mysql_query($insertCons);
+			$insertArr ="INSERT INTO arreglos(lexema,tipo) VALUES ('".$varCons."','".$varTipo."')";
+			$result=$con->query($insertArr);
 		}
-	}*/
+	}
 
+	function AddD($valor,$varCons)
+	{
+
+		include('conexion.php');
+
+		require('globales.php');
+
+		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
+		$result=$con->query($selectARR);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['id_arreglo'];
+		echo $var." variable";
+		//echo "<br>valor es --$valor-- y varconss --$varCons-- <br>";
+		$valor1 = str_replace("'", " ", $valor );
+		$updateArr ="INSERT INTO valoresa(id_arreglo,valor) VALUES ('".$var."','".$valor1."')";
+
+		
+
+		//echo "<br>$updateCons<br>";
+		$con->query($updateArr);
+		
+		
+	}
 	/*function ArrConsEnt($arrEnt,$varCons)
 	{
 		require('globales.php');
@@ -320,106 +351,6 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		
 
 	}*/
-	//funcion arreglo de constantes de caracter
-	function ArrConsCar($arrCar,$varCons)
-	{
-		require('globales.php');
-
-		$ciclo=count($arrCar);
-		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
-		if(empty($arrCar))
-		{
-			echo "<br>esta vacio asignamos el token es -";
-			echo $varCons;
-			echo "-<br>";
-			array_push($arrCar, $varCons);
-		}
-		else
-		{
-
-				if(in_array($varCons, $arrCar))
-				{	
-					echo "<br>no hacer push<br>";
-					echo "<br>".$varCons."-->Car <br>";
-				}
-				else
-				{
-					echo "<br>hacer el push no son iguales<br>";
-					echo "<br>".$varCons."-->Car<br>";
-					array_push($arrCar, $varCons);
-				}
-		}	
-
-		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
-
-	}
-//funcion arreglo de arreglos de enteros
-	function ArrArrEnt($aArrEnt,$varCons)
-	{
-		require('globales.php');
-
-		$ciclo=count($aArrEnt);
-		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
-		if(empty($aArrEnt))
-		{
-			echo "<br>esta vacio asignamos el token es -";
-			echo $varCons;
-			echo "-<br>";
-			array_push($aArrEnt, $varCons);
-		}
-		else
-		{		
-				if(in_array($varCons, $aArrEnt))
-				{	
-						
-					echo "<br>no hacer push<br>";
-				}
-				else
-				{
-
-					
-					echo "<br>hacer el push no son iguales<br>";
-					array_push($aArrEnt, $varCons);
-				}
-		}	
-
-		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
-
-	}
-
-	//funcion arreglo de arreglos de caracteres
-	function ArrArrCar($aArrCar,$varCons)
-	{
-		require('globales.php');
-
-		$ciclo=count($aArrCar);
-		echo "<br> numero de elementos en el arreglo vale $ciclo<br>";
-		if(empty($aArrCar))
-		{
-			echo "<br>esta vacio asignamos el token es -";
-			echo $varCons;
-			echo "-<br>";
-			array_push($aArrCar, $varCons);
-		}
-		else
-		{		
-				if(in_array($varCons, $aArrCar))
-				{	
-						
-					echo "<br>no hacer push<br>";
-				}
-				else
-				{
-
-					
-					echo "<br>hacer el push no son iguales<br>";
-					array_push($aArrCar, $varCons);
-				}
-		}	
-
-		echo "<br><b><font color='green'>salio del ciclo</font></b><br>";	
-
-	}
 
 	function DA2()
 	{
@@ -433,11 +364,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			emparejar($id);
 			emparejar($igual);
 			emparejar($llaveA);
-			if ($preanalisis==$ent) {
-				ArrArrEnt($aArrEnt,$varCons);}
-				else if($preanalisis==$c){
-					ArrArrCar($aArrCar,$varCons);
-				}
+			$varTipo=$preanalisis;
+			tArreglos($varTipo,$varCons);
 			D();
 			emparejar($llaveC);
 			DA3();
@@ -513,9 +441,14 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		require('globales.php');
 
 		if ($preanalisis== $ent) {
+
+			$valor=$Tokens[$c3];
+			AddD($valor,$varCons);
 			emparejar($ent); D2();
 		}
 		else if ($preanalisis== $c) {
+			$valor=$Tokens[$c3];
+			AddD($valor,$varCons);
 			emparejar($c); D3();
 		}
 		else {
@@ -527,7 +460,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 	{
 		require('globales.php');
 		if ($preanalisis== $coma) {
-			emparejar($coma); emparejar($ent); D2();
+			emparejar($coma); $valor=$Tokens[$c3];
+			AddD($valor,$varCons);emparejar($ent); D2();
 		}
 		else if ($preanalisis== $llaveC) {
 			//cadena vacia
@@ -541,7 +475,8 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 	{
 		require('globales.php');
 		if ($preanalisis== $coma) {
-			emparejar($coma); emparejar($c); D3();
+			emparejar($coma); $valor=$Tokens[$c3];
+			AddD($valor,$varCons);emparejar($c); D3();
 		}
 		else if ($preanalisis == $llaveC) {
 			
