@@ -241,6 +241,7 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 			$sql = 'INSERT INTO constantes(lexema,tipo) VALUES ("'.$varCons.'","'.$varTipo.'")' ;
 			//$result2=mysqli_query($con,$insertCons);
 			$con->query($sql);
+
 			
 			
 
@@ -258,12 +259,18 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 		//echo "<br>valor es --$valor-- y varconss --$varCons-- <br>";
 		$valor1 = str_replace("'", " ", $valor );
 		$updateCons="UPDATE constantes SET valor='$valor1' WHERE lexema='$varCons' ";
-
-		
-
-		//echo "<br>$updateCons<br>";
 		$con->query($updateCons);
 		
+
+		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'" AND valor="'.$valor1.'"';
+		//$result=mysqli_query($con,$sql) or die("consulta fallida").mysqli_error($con);
+		$result=$con->query($sql);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['id_constante'];
+
+
+		$sql2 = 'INSERT INTO constantesactual(id_constante,valora) VALUES ("'.$var.'","'.$valor1.'")' ;
+		$con->query($sql2);
 		
 	}
 	function tArreglos($varTipo,$varCons)
@@ -314,6 +321,9 @@ $updateCons="UPDATE constantes SET valor='".$newValor."' WHERE lexema='".$lexema
 
 		//echo "<br>$updateCons<br>";
 		$con->query($updateArr);
+		$uId = mysqli_insert_id($con);
+		$sql2 = 'INSERT INTO valoraactual(id_arreglo,id_valoresA,valora) VALUES ("'.$var.'","'.$uId.'","'.$valor1.'")' ;
+		$con->query($sql2);
 		
 		
 	}
@@ -1204,13 +1214,17 @@ function verificarlim2($varCons)
 		$sql1='TRUNCATE TABLE constantes';
 		$sql2='TRUNCATE TABLE arreglos';
 		$sql3='TRUNCATE TABLE valoresa';
-		$sql4='SET FOREIGN_KEY_CHECKS=1';
+		$sql4='TRUNCATE TABLE constantesactual';
+		$sql5='TRUNCATE TABLE valoraactual';
+		$sql6='SET FOREIGN_KEY_CHECKS=1';
 
 		$result=$con->query($sql);
 		$result1=$con->query($sql1);
 		$result2=$con->query($sql2);
 		$result3=$con->query($sql3);
 		$result4=$con->query($sql4);
+		$result4=$con->query($sql5);
+		$result4=$con->query($sql6);
 						
 	}
 
