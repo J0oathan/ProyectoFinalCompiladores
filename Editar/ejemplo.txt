@@ -38,7 +38,7 @@ fin
 
 
 sino
-Escribe(x);
+Escribe('0');
 fin
 si (datos[limite]=='23') entonces lee(figura); fin
 valorFinal=final+445;

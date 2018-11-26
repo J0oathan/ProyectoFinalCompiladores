@@ -883,7 +883,7 @@ function verificarlim2($varCons)
 
 		if($preanalisis==$ent||$preanalisis==$c)
 		{
-			CONSTANTE2();
+			CONSTANTE();
 		}
 		else if($preanalisis==$id)
 		{
@@ -1199,16 +1199,24 @@ function verificarlim2($varCons)
 	{
 		require 'conexion.php';
 		//esto debe llevar rel query pero no se como jajaja
-/*
-		SET FOREIGN_KEY_CHECKS=0;
-		TRUNCATE TABLE constantes;
-		TRUNCATE TABLE arreglos;
-		TRUNCATE TABLE valoresa;
-		SET FOREIGN_KEY_CHECKS=1		*/
+
+		$sql='SET FOREIGN_KEY_CHECKS=0';
+		$sql1='TRUNCATE TABLE constantes';
+		$sql2='TRUNCATE TABLE arreglos';
+		$sql3='TRUNCATE TABLE valoresa';
+		$sql4='SET FOREIGN_KEY_CHECKS=1';
+
+		$result=$con->query($sql);
+		$result1=$con->query($sql1);
+		$result2=$con->query($sql2);
+		$result3=$con->query($sql3);
+		$result4=$con->query($sql4);
+						
 	}
 
 //emparejar($preanalisis);
 	//llamar función que hago truncate all a la DB
+	TRUNCDB();
 	analex($c3);
 	P();
 
