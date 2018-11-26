@@ -405,6 +405,86 @@ function verificarlim2($varCons)
 
 		
 	}
+	///////////////////Verificar EXPR
+	function verificarExpr($varCons)
+	{
+		require('globales.php');
+		require 'conexion.php';
+		///VAlores de VarCons///
+		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$result=$con->query($sql);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['lexema'];
+		$tipovar=$row['tipo'];
+
+		echo "<br>".$varCons."variable varCons de la consulta constantes<br>";
+		echo "<br>";
+		echo $var." variable  var de la consulta constantes<br>";
+		echo "<br>";
+		echo $tipovar." variable tipovar de la consulta constantes<br>";
+
+
+		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
+		$result2=$con->query($selectARR);
+		$row2=mysqli_fetch_assoc($result2);
+		$var2=$row2['lexema'];
+		$tipovar2=$row2['tipo'];
+		echo "<br>".$varCons."variable varCons de la consulta arreglos<br>";
+		echo "<br>";
+		echo $var2." variable  var2 de la consulta arreglos<br>";
+			echo "<br>";
+		echo $tipovar2." variable tipovar2 de la consulta arreglos<br>";
+
+		///VAlores de varExpr///
+		$selectvarExp='SELECT * FROM constantes WHERE lexema ="'.$varExpr.'"';
+		$result3=$con->query($selectvarExp);
+		$row3=mysqli_fetch_assoc($result3);
+		$tipovarE=$row3['tipo'];
+		echo "<br>";
+		echo $tipovarE." variable tipovarE de la consulta constantes<br>";
+
+		$selectExpARR ="SELECT * FROM arreglos WHERE lexema='".$varExpr."'";
+		$result4=$con->query($selectExpARR);
+		$row4=mysqli_fetch_assoc($result4);
+		$tipovarE2=$row4['tipo'];
+		echo "<br>";
+		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
+
+		
+		if(($tipovar==$tipovarE) || ( $tipovar==$tipovarE2) || ( $tipovar2==$ent)|| ($tipovarE2==$ent) ) //si se encuentran resultados
+		{	
+
+			
+			echo "<br>".$varCons."-->varCons if  <br>";
+			echo "<br>".$varExpr."-->varCons if  <br>";
+			echo "<br>Ejecutar gráfico función a realizar <br>";
+			
+		}
+		else{
+			echo "<br>".$varCons."-->varcons  else <br>";
+			
+			echo "<br>".$varExpr."-->varCons if  <br>";
+			echo "<br>Error Semántico. La variable ".$varCons." no ha sido declarada o no es del mismo tipo que ".$varExpr."en Verificar<br>";
+			die();
+		}
+
+		
+	}
+
+////verificar expresión tipo ent o caracter
+
+	function verificarExprEnt($varCons)
+	{
+		
+		
+	}
+
+	function verificarExprCar($varCons)
+	{
+		
+		
+	}
+
 
 
 
@@ -508,7 +588,10 @@ function verificarlim2($varCons)
 		{
 			
 			//ArrConsEnt($varCons,$arrEnt);
+
 			$valor=$Tokens[$c3];
+			$varCons=$Tokens[$c3];
+			verificarExprEnt($varCons);
 			emparejar($ent);
 			
 
@@ -516,7 +599,9 @@ function verificarlim2($varCons)
 		else if($preanalisis==$c)
 		{	
 			$valor=$Tokens[$c3];
-			
+			$varCons=$Tokens[$c3];
+			verificarExprCar($varCons);
+
 			//ArrConsCar($varCons,$arrCar);
 			emparejar($c);
 			
@@ -671,7 +756,7 @@ function verificarlim2($varCons)
 			$varCons=$Tokens[$c3];
 			$varExpr= $Tokens[$c3];
 			verificar($varCons);
-			emparejar($id); ARR(); emparejar($igual); OP1(); EXPR2(); emparejar($puntoycoma); INST();
+			emparejar($id); ARR(); emparejar($igual); OP2(); EXPR2(); emparejar($puntoycoma); INST();
 		}
 		
 		else {
@@ -683,7 +768,7 @@ function verificarlim2($varCons)
 	{
 		require('globales.php'); 
 		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi ||  $preanalisis== $mod) {
-			OP(); OP1();
+			OP(); OP2();
 		}
 		elseif ($preanalisis== $puntoycoma) {
 			//cadena vacia
@@ -733,6 +818,28 @@ function verificarlim2($varCons)
 		{
 			$varCons=$Tokens[$c3];
 			verificar($varCons);
+			emparejar($id); ARR();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba entero, caracter o id<br>";
+		}
+
+	}
+
+	function OP2()
+	{
+			require('globales.php');
+
+		if($preanalisis==$ent||$preanalisis==$c)
+		{
+			CONSTANTE2();
+		}
+		else if($preanalisis==$id)
+		{
+			$varCons=$Tokens[$c3];
+
+			verificarExpr($varCons);//verificar exp
 			emparejar($id); ARR();
 		}
 		else
@@ -871,7 +978,7 @@ function verificarlim2($varCons)
 
 		if($preanalisis == $ent || $preanalisis == $c || $preanalisis == $id)
 		{
-			OP1(); SR(); OP1();
+			OP2(); SR(); OP2();
 		}
 		else
 		{
