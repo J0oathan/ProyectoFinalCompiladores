@@ -451,7 +451,7 @@ function verificarlim2($varCons)
 		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
 
 		
-		if(($tipovar==$tipovarE) || ( $tipovar==$tipovarE2) || ( $tipovar2==$ent)|| ($tipovarE2==$ent) ) //si se encuentran resultados
+		if(($tipovar==$tipovarE) || ( $tipovar==$tipovarE2) || ( $tipovar2==$tipovarE)|| ($tipovar2==$tipovarE2) ) //si se encuentran resultados
 		{	
 
 			
@@ -474,15 +474,84 @@ function verificarlim2($varCons)
 ////verificar expresión tipo ent o caracter
 
 	function verificarExprEnt($varCons)
+
 	{
+		require('globales.php');
+		require 'conexion.php';
+		///VAlores de VarCons///
 		
+		///VAlores de varExpr///
+		$selectvarExp='SELECT * FROM constantes WHERE lexema ="'.$varExpr.'"';
+		$result3=$con->query($selectvarExp);
+		$row3=mysqli_fetch_assoc($result3);
+		$tipovarE=$row3['tipo'];
+		echo "<br>";
+		echo $tipovarE." variable tipovarE de la consulta constantes<br>";
+
+		$selectExpARR ="SELECT * FROM arreglos WHERE lexema='".$varExpr."'";
+		$result4=$con->query($selectExpARR);
+		$row4=mysqli_fetch_assoc($result4);
+		$tipovarE2=$row4['tipo'];
+		echo "<br>";
+		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
+
+		
+		if($tipovarE==$ent || $tipovarE2==$ent) //si se encuentran resultados
+		{	
+
+			
+			echo "<br>".$varExpr."-->varExpr if  <br>";
+			echo "<br>".$tipovarE."-->tipovarE if  <br>";
+			echo "<br>Ejecutar gráfico función a realizar <br>";
+			
+		}
+		else{
+			echo "<br>".$varExpr."-->varExpr else  <br>";
+			echo "<br>".$tipovarE."-->tipovarE else  <br>";
+			echo "<br>Error Semántico. La variable ".$varCons." es de tipo entero y ".$varExpr." no lo es en VerificarExprEnt<br>";
+			die();
+		}
 		
 	}
 
 	function verificarExprCar($varCons)
 	{
+		$varCons1 = str_replace("'", " ", $varCons );
+		require('globales.php');
+		require 'conexion.php';
+
+		///VAlores de varExpr///
+		$selectvarExp='SELECT * FROM constantes WHERE lexema ="'.$varExpr.'"';
+		$result3=$con->query($selectvarExp);
+		$row3=mysqli_fetch_assoc($result3);
+		$tipovarE=$row3['tipo'];
+		echo "<br>";
+		echo $tipovarE." variable tipovarE de la consulta constantes<br>";
+
+		$selectExpARR ="SELECT * FROM arreglos WHERE lexema='".$varExpr."'";
+		$result4=$con->query($selectExpARR);
+		$row4=mysqli_fetch_assoc($result4);
+		$tipovarE2=$row4['tipo'];
+		echo "<br>";
+		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
+
 		
-		
+		if($tipovarE==$c || $tipovarE2==$c) //si se encuentran resultados
+		{	
+
+			
+			
+			echo "<br>".$varExpr."-->varExpr if  <br>";
+			echo "<br>".$tipovarE."-->tipovarE if  <br>";
+			echo "<br>Ejecutar gráfico función a realizar <br>";
+			
+		}
+		else{
+			echo "<br>".$varExpr."-->varExpr else  <br>";
+			echo "<br>".$tipovarE."-->tipovarE else  <br>";
+			echo "<br>Error Semántico. La variable ".$varCons." es de tipo caracter y ".$varExpr." no lo es en VerificarExprCar<br>";
+			die();
+		}
 	}
 
 
@@ -767,8 +836,10 @@ function verificarlim2($varCons)
 	function EXPR2()
 	{
 		require('globales.php'); 
+		
 		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi ||  $preanalisis== $mod) {
-			OP(); OP2();
+			
+			OP();   OP2();
 		}
 		elseif ($preanalisis== $puntoycoma) {
 			//cadena vacia
@@ -978,6 +1049,7 @@ function verificarlim2($varCons)
 
 		if($preanalisis == $ent || $preanalisis == $c || $preanalisis == $id)
 		{
+			$varExpr= $Tokens[$c3];
 			OP2(); SR(); OP2();
 		}
 		else
