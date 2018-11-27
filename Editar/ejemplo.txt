@@ -1,6 +1,7 @@
 programA pares
 constantes
 car='0'
+x=0
 limite='0'
 lim=0
 par=0
@@ -14,12 +15,13 @@ figura=0
 arreglos valores={534, 789, 212, 6, 8}
      datos={'n','9','0','9'}
 	inicio 
+x=1;
 car='2'+'k';
     lee(car);
-limite='0';
-datos[1]='34';
+limite='34';
+datos[x]='34';
 
-	si (car=='p') entonces
+	si (par==5) entonces
 para var=lim hasta 0 paso -1 hacer
 par=valores[var]mod 2;si (par!=10) entonces
 valores[var]=valores[var]+1;
@@ -40,7 +42,6 @@ fin
 si (datos[6]=='23') entonces lee(figura); fin
 valorFinal=final+445;
 valorFinl=45/final;
-car='2'+'k';
 fin
 fin
 

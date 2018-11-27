@@ -377,39 +377,52 @@ function verificarlim2($varCons)
 	{
 		require('globales.php');
 		require 'conexion.php';
-		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$sql = 'SELECT * FROM constantes c INNER JOIN constantesactual ca on c.id_constante=ca.id_constante WHERE c.lexema ="'.$varCons.'" and c.tipo = "'.$ent.'"';
 		$result=$con->query($sql);
 		$row=mysqli_fetch_assoc($result);
-		$var=$row['lexema'];
-		$tipovar=$row['tipo'];
+		$var=$row['valora'];
+		$varn=($var);
 
 		echo "<br>".$varCons."variable varCons de la consulta constantes<br>";
 		echo "<br>";
-		echo $var." variable  var de la consulta constantes<br>";
-		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
-		$result2=$con->query($selectARR);
-		$row2=mysqli_fetch_assoc($result2);
-		$var2=$row2['lexema'];
-		$tipovar2=$row2['tipo'];
-		echo "<br>".$varCons."variable varCons de la consulta arreglos<br>";
-		echo "<br>";
-		echo $var2." variable  var2 de la consulta arreglos<br>";
-		
-		if(($var==$varCons && $tipovar==$ent) || ($var2==$varCons && $tipovar==$ent)) //si se encuentran resultados
-		{	
+		echo $var." variable  valor a de la consulta constantes vALOR limit en el arreglo<br>";
 
-			
-			echo "<br>".$varCons."-->varCons if  <br>";
-			echo "<br>".$var."-->var if  <br>";
-			echo "<br>".$var2."-->var2 if  <br>";
-			echo "<br>Ejecutar gráfico función a realizar <br>";
+		$sql1 = 'SELECT COUNT(*) as total from arreglos a INNER join valoresa va on a.id_arreglo=va.id_arreglo where a.lexema="'.$varExpr.'"';
+		$result1=$con->query($sql1);
+		$row1=mysqli_fetch_assoc($result1);
+		$var1=$row1['total'];
+		echo $varExpr."variable varExpr para la consulta count";
+		echo $var1." variable  result1  de la consulta varExp tamaño arrelgo<br>";
+		
+
+		$sql2 = 'SELECT * from arreglos a INNER join valoresa va on a.id_arreglo=va.id_arreglo where a.lexema="'.$varExpr.'"';
+		$result2=$con->query($sql2);
+		$row2=mysqli_fetch_assoc($result2);
+		$id_arregloVE=$row2['id_arreglo'];
+
+		echo $id_arregloVE." id de arreglo de varr Expr<br>";
+		
+		if($var<=$var1) //si se encuentran resultados
+		{	
+			$sql3='SELECT id_valoresA from valoraactual  where id_arreglo="'.$id_arregloVE.'" LIMIT '.$varn.',1';
+			$resul3=$con->query($sql3);
+			$row3=mysqli_fetch_assoc($resul3);
+			$var3=$row3['id_valoresA'];
+		echo $var3." variable  resul3  de la consult id_valoresA en el if<br>";
+
+			echo $valorExpr." variable  valorExpr<br>";
+
+			$sql4='UPDATE valoraactual SET valora = "'.$valorExpr.'" where id_valoresA="'.$var3.'"';
+			$con->query($sql4);
+
+			echo "<br>valor actualizadooooo<br>";
 			
 		}
 		else{
 			echo "<br>".$varCons."-->varcons  else <br>";
 			echo "<br>".$var."-->var if  <br>";
 			echo "<br>".$var2."-->var2 if  <br>";
-			echo "<br>Error Semántico. La variable ".$varCons." no ha sido declarada en Verificar o no es entero<br>";
+			echo "<br>Error el valor de la variable".$varCons." excede la longitud del arreglo".$varExpr."<br>";
 			die();
 		}
 
@@ -612,12 +625,13 @@ function verificarlim2($varCons)
 			echo "<br>".$tipovarE."-->tipovarE if  <br>";
 			echo "<br>Ejecutar gráfico función a realizar <br>";
 			//if($ope=="+" || $ope=="-" || $ope=="/" || $ope=="*" || $ope==$mod || $ope=="")
+			//if(preg_match('/+/', $valorExpr))
 			//{
 				$updatevalorcons ="UPDATE constantesactual SET valora='".$valorExpr."' WHERE id_constante='".$idVarEC."'";
 				$result4=$con->query($updatevalorcons);
 			//}
 
-			echo $ope."ope en verificarExprEnt <br><br><br>";
+			echo $ope."ope y valorExpr=".$valorExpr." en verificarExprEnt <br><br><br>";
 			
 		}
 		else{
@@ -665,7 +679,9 @@ function verificarlim2($varCons)
 			echo "<br>".$tipovarE."-->tipovarE if  <br>";
 			echo "<br>Ejecutar gráfico función a realizar función verificarExprCar constantes<br>";
 			//if($ope=="+" || $ope=="-" || $ope=="/" || $ope=="*" || $ope==$mod || $ope=="")
-			//{
+			//if (preg_match('/+/', $valorExpr)) {
+			
+			
 				$updatevalorconsC ="UPDATE constantesactual SET valora='".addslashes($valorExpr)."' WHERE id_constante='".$idVarEC."'";
 				$result4=$con->query($updatevalorconsC);
 			//}
@@ -1402,6 +1418,11 @@ function verificarlim2($varCons)
 	analex($c3);
 	P();
 
-
-
+	$queryida='SELECT id_valoresA from valoresa where id_arreglo=1';
+	$result14=$con->query($queryida);
+	//$row14=mysqli_fetch_assoc($result14);
+	while ($row14=mysqli_fetch_assoc($result14)) {
+		print_r($row14);
+	}
+	
  ?>

@@ -57,71 +57,51 @@ fin
 
 
 programA pares
-     
-constantes x=1
-x2='2'
+constantes
+car='0'
+limite='0'
 lim=0
-var=0
 par=0
-car=0
-figura=3
-limite=0
+var=0
 impar=0
 valorFinal=0
 valorFinl=0
 final=0
+figura=0
+
 arreglos valores={534, 789, 212, 6, 8}
      datos={'n','9','0','9'}
-valors2={3,6}
-valor4={'g'}
-
-programA pares
-     
-constantes x=1
-x2='2'
-lim=0
-var=0
-par=0
-car='2'
-figura=3
-limite=0
-impar=0
-valorFinal=0
-valorFinl=0
-final=0
-arreglos valores={534, 789, 212, 6, 8}
-     datos={'n','9','0','9'}
-valors2={3,6}
-valor4={'g'}
-
-  
-inicio 
-car='1';
+	inicio 
+car='2'+'k';
     lee(car);
-limite=0;
+limite='0';
+datos[1]='34';
 
-lim=valores.length;
 	si (car=='p') entonces
-para var=lim hasta 0 paso +1  hacer
-par=valores[var];si (par!=10) entonces
-valores[var]=valores[var];
+para var=lim hasta 0 paso -1 hacer
+par=valores[var]mod 2;si (par!=10) entonces
+valores[var]=valores[var]+1;
      fin
  fin
 	sino	
-si (car<='i') entonces para var=lim hasta 0 paso -1 hacer
-impar=valores[var];
+si (limite=='3') entonces para var=lim hasta 0 paso -1 hacer
+impar=valores[var]mod 2;
 si (par==0) entonces
-		valores[var]=valores[var];
+		valores[var]=valores[var]+1;
 fin
 fin
 
 
 sino
+Escribe('0');
+fin
+si (datos[6]=='23') entonces lee(figura); fin
+valorFinal=final+445;
+valorFinl=45/final;
+car='2'+'k';
+fin
+fin
 
-fin
-si (x==2) entonces lee(figura); fin
-valorFinal=final;
-valorFinl=45;
-fin
-fin
+
+
 
