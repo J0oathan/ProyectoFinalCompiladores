@@ -130,6 +130,8 @@ $preanalisis=analex($c3);
 			INST();
 			emparejar($fin);
 			echo "<br>TERMINO DE RECORRER EL PROGRAMA<br>";
+
+			include 'load.html';
 		}
 		else
 		{
@@ -1418,11 +1420,7 @@ function verificarlim2($varCons)
 	analex($c3);
 	P();
 
-	$queryida='SELECT id_valoresA from valoresa where id_arreglo=1';
-	$result14=$con->query($queryida);
-	//$row14=mysqli_fetch_assoc($result14);
-	while ($row14=mysqli_fetch_assoc($result14)) {
-		print_r($row14);
-	}
+	
+	
 	
  ?>
