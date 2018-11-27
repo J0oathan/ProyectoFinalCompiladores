@@ -1,21 +1,17 @@
 programA pares
-     
-constantes x=1
-x2='2'
+     constantes
 lim=0
-var=0
-par=0
-car='0'
-figura=3
-limite=0
-impar=0
-valorFinal=0
-valorFinl=0
-final=0
+
 arreglos valores={534, 789, 212, 6, 8}
-     datos={'n','9','0','9'}
-valors2={3,6}
-valor4={'g'}
-	inicio 
+
+inicio
+lim=5+3;
+
 
 fin
+
+
+
+
+
+

@@ -495,6 +495,7 @@ function verificarlim2($varCons)
 		$result3=$con->query($selectvarExp);
 		$row3=mysqli_fetch_assoc($result3);
 		$tipovarE=$row3['tipo'];
+		$idVarEC=$row3['id_constante'];
 		echo "<br>";
 		echo $tipovarE." variable tipovarE de la consulta constantes<br>";
 
@@ -502,6 +503,7 @@ function verificarlim2($varCons)
 		$result4=$con->query($selectExpARR);
 		$row4=mysqli_fetch_assoc($result4);
 		$tipovarE2=$row4['tipo'];
+		$idVarEA=$row4['id_arreglo'];
 		echo "<br>";
 		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
 
@@ -513,6 +515,11 @@ function verificarlim2($varCons)
 			echo "<br>".$varExpr."-->varExpr if  <br>";
 			echo "<br>".$tipovarE."-->tipovarE if  <br>";
 			echo "<br>Ejecutar gráfico función a realizar <br>";
+			echo "<pre>".$valorExpr."</pre>";
+			$updatevalorcons ="UPDATE constantesactual SET valora='".$valorExpr."' WHERE id_constante='".$idVarEC."'";
+			$result4=$con->query($updatevalorcons);
+			
+			
 			
 		}
 		else{
@@ -835,7 +842,9 @@ function verificarlim2($varCons)
 			$varCons=$Tokens[$c3];
 			$varExpr= $Tokens[$c3];
 			verificar($varCons);
-			emparejar($id); ARR(); emparejar($igual); OP2(); EXPR2(); emparejar($puntoycoma); INST();
+			emparejar($id); ARR(); emparejar($igual);
+			$operando1=$Tokens[$c3];
+			 OP2(); EXPR2(); emparejar($puntoycoma); INST();
 		}
 		
 		else {
@@ -849,7 +858,10 @@ function verificarlim2($varCons)
 		
 		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi ||  $preanalisis== $mod) {
 			
-			OP();   OP2();
+			$ope=$Tokens[$c3];
+			OP();   
+			$operando2=$Tokens[$c3]; 
+			OP2();
 		}
 		elseif ($preanalisis== $puntoycoma) {
 			//cadena vacia
@@ -914,12 +926,14 @@ function verificarlim2($varCons)
 
 		if($preanalisis==$ent||$preanalisis==$c)
 		{
+			$valorExpr=$operando1.$operador.$operando2;
+
 			CONSTANTE2();
 		}
 		else if($preanalisis==$id)
 		{
 			$varCons=$Tokens[$c3];
-
+			$valorExpr=$Tokens[$c3];
 			verificarExpr($varCons);//verificar exp
 			emparejar($id); ARR();
 		}
