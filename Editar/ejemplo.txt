@@ -14,6 +14,8 @@ figura=0
 
 arreglos valores={534, 789, 212, 6, 8}
      datos={'n','9','0','9'}
+arrent={1,2}
+arrcar={'1','2'}
 	inicio 
 x=1;
 car='2'+'k';
