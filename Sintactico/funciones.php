@@ -421,17 +421,18 @@ function verificarlim2($varCons)
 		require('globales.php');
 		require 'conexion.php';
 		///VAlores de VarCons///
-		$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		//$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$sql= 'SELECT * FROM constantes c INNER JOIN constantesactual ca ON c.id_constante = ca.id_constante WHERE lexema ="'.$varCons.'" ';
 		$result=$con->query($sql);
 		$row=mysqli_fetch_assoc($result);
 		$var=$row['lexema'];
 		$tipovar=$row['tipo'];
-
-		echo "<br>".$varCons."variable varCons de la consulta constantes<br>";
+		$valoridC=$row['valora'];
+		$operando2=$valoridC;
+		echo "<br>".$varCons."variable varCons de la consulta constante verificarExpres<br>";
 		echo "<br>";
-		echo $var." variable  var de la consulta constantes<br>";
 		echo "<br>";
-		echo $tipovar." variable tipovar de la consulta constantes<br>";
+		echo $tipovar." variable tipovar de la consulta constantes  verificarExpre<br>";
 
 
 		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
@@ -439,48 +440,142 @@ function verificarlim2($varCons)
 		$row2=mysqli_fetch_assoc($result2);
 		$var2=$row2['lexema'];
 		$tipovar2=$row2['tipo'];
-		echo "<br>".$varCons."variable varCons de la consulta arreglos<br>";
+		echo "<br>".$varCons."variable varCons de la consulta arreglos  verificarExpre<br>";
 		echo "<br>";
-		echo $var2." variable  var2 de la consulta arreglos<br>";
+		
 			echo "<br>";
-		echo $tipovar2." variable tipovar2 de la consulta arreglos<br>";
+		echo $tipovar2." variable tipovar2 de la consulta arreglos  verificarExpre<br>";
 
 		///VAlores de varExpr///
 		$selectvarExp='SELECT * FROM constantes WHERE lexema ="'.$varExpr.'"';
 		$result3=$con->query($selectvarExp);
 		$row3=mysqli_fetch_assoc($result3);
 		$tipovarE=$row3['tipo'];
+		$idConsVarExpr=$row3['id_constante'];
 		echo "<br>";
-		echo $tipovarE." variable tipovarE de la consulta constantes<br>";
+		echo $tipovarE." variable tipovarE de la consulta constantes  verificarExpre<br>";
 
 		$selectExpARR ="SELECT * FROM arreglos WHERE lexema='".$varExpr."'";
 		$result4=$con->query($selectExpARR);
 		$row4=mysqli_fetch_assoc($result4);
 		$tipovarE2=$row4['tipo'];
 		echo "<br>";
-		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
+		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos  verificarExpre<br>";
 
-		
-		if(($tipovar==$tipovarE) || ( $tipovar==$tipovarE2) || ( $tipovar2==$tipovarE)|| ($tipovar2==$tipovarE2) ) //si se encuentran resultados
+		if(($tipovar==$tipovarE) || ($tipovar==$tipovarE2) || ($tipovar2==$tipovarE) || ($tipovar2==$tipovarE2)){
+		if(($tipovar==$tipovarE && $tipovar2=="")  ||  ($tipovar2==$tipovarE2 && $tipovar=="") ) //si se encuentran resultados
 		{	
 
 			
 			echo "<br>".$varCons."-->varCons if  <br>";
-			echo "<br>".$varExpr."-->varCons if  <br>";
-			echo "<br>Ejecutar gráfico función a realizar <br>";
+			echo "<br>".$varExpr."-->varExpr if  <br>";
+			echo "<br>Ejecutar gráfico función a realizar de verificarExpr <br>";
+
+			echo "<br>LLL tipovar=".$tipovar." y tipovarE=".$tipovarE."<br><br>";
+			echo "<br>LLL tipovar2=".$tipovar2." y tipovarE2=".$tipovarE2."<br><br>";
+			$valorGlobalExID=$operando1.$ope.$operando2;
+			//if($ope=="+" || $ope=="-" || $ope=="/" || $ope=="*" || $ope==$mod || $ope=="")
+			//{
+				$updateIDEx= 'UPDATE constantesactual SET valora="'.$valorGlobalExID.'" where id_constante="'.$idConsVarExpr.'"';
+				$con->query($updateIDEx);
+			//}
+			echo "<br>LLL valoridC=".$valoridC." y idConsVarExpr=".$idConsVarExpr."<br><br>";
+			echo $ope."ope en verificarExpr<br><br><br>";
+		}}
+		else{
+			echo "<br>".$varCons."-->varcons  else <br>";
 			
+			echo "<br>".$varExpr."-->varCons if  <br>";
+			echo "<br>Error Semántico. La variable ".$valorExpr." no ha sido declarada o no es del mismo tipo que ".$varExpr."en Verificar<br>";
+			die();
+		}
+
+		$operando2="";
+		$ope="";
+	}
+
+
+
+	function verificarExpr2($varCons)
+	{
+		require('globales.php');
+		require 'conexion.php';
+		///VAlores de VarCons///
+		//$sql = 'SELECT * FROM constantes WHERE lexema ="'.$varCons.'"';
+		$sql= 'SELECT * FROM constantes c INNER JOIN constantesactual ca ON c.id_constante = ca.id_constante WHERE lexema ="'.$varCons.'" ';
+		$result=$con->query($sql);
+		$row=mysqli_fetch_assoc($result);
+		$var=$row['lexema'];
+		$tipovar=$row['tipo'];
+		$valoridC=$row['valora'];
+		$operando1=$valoridC;
+
+		echo "<br>".$varCons."variable varCons de la consulta constante verificarExpres<br>";
+		echo "<br>";
+		echo "<br>";
+		echo $tipovar." variable tipovar de la consulta constantes  verificarExpre<br>";
+
+
+		$selectARR ="SELECT * FROM arreglos WHERE lexema='".$varCons."'";
+		$result2=$con->query($selectARR);
+		$row2=mysqli_fetch_assoc($result2);
+		$var2=$row2['lexema'];
+		$tipovar2=$row2['tipo'];
+		echo "<br>".$varCons."variable varCons de la consulta arreglos  verificarExpre<br>";
+		echo "<br>";
+		
+			echo "<br>";
+		echo $tipovar2." variable tipovar2 de la consulta arreglos  verificarExpre<br>";
+
+		///VAlores de varExpr///
+		$selectvarExp='SELECT * FROM constantes WHERE lexema ="'.$varExpr.'"';
+		$result3=$con->query($selectvarExp);
+		$row3=mysqli_fetch_assoc($result3);
+		$tipovarE=$row3['tipo'];
+		$idConsVarExpr=$row3['id_constante'];
+		echo "<br>";
+		echo $tipovarE." variable tipovarE de la consulta constantes  verificarExpre<br>";
+
+		$selectExpARR ="SELECT * FROM arreglos WHERE lexema='".$varExpr."'";
+		$result4=$con->query($selectExpARR);
+		$row4=mysqli_fetch_assoc($result4);
+		$tipovarE2=$row4['tipo'];
+		echo "<br>";
+		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos  verificarExpre<br>";
+
+		
+		if(($tipovar==$tipovarE) || ($tipovar==$tipovarE2) || ($tipovar2==$tipovarE) || ($tipovar2==$tipovarE2)){
+			if(($tipovar==$tipovarE && $tipovar2=="")  ||  ($tipovar2==$tipovarE2 && $tipovar=="") ) //si se encuentran resultados
+			{	
+
+				
+				echo "<br>".$varCons."-->varCons if  <br>";
+				echo "<br>".$varExpr."-->varExpr if  <br>";
+				echo "<br>Ejecutar gráfico función a realizar de verificarExpr <br>";
+
+				echo "<br>LLL tipovar=".$tipovar." y tipovarE=".$tipovarE."<br><br>";
+				echo "<br>LLL tipovar2=".$tipovar2." y tipovarE2=".$tipovarE2."<br><br>";
+				
+				$valorGlobalExID=$operando1.$ope.$operando2;
+				//if($ope=="+" || $ope=="-" || $ope=="/" || $ope=="*" || $ope==$mod || $ope=="")
+				//{
+					$updateIDEx= 'UPDATE constantesactual SET valora="'.$valorGlobalExID.'" where id_constante="'.$idConsVarExpr.'"';
+					$con->query($updateIDEx);
+				//}
+				echo $ope."ope en verificarExpr2 <br><br><br>";
+			}
 		}
 		else{
 			echo "<br>".$varCons."-->varcons  else <br>";
 			
 			echo "<br>".$varExpr."-->varCons if  <br>";
-			echo "<br>Error Semántico. La variable ".$varCons." no ha sido declarada o no es del mismo tipo que ".$varExpr."en Verificar<br>";
+			echo "<br>Error Semántico. La variable ".$valorExpr." no ha sido declarada o no es del mismo tipo que ".$varExpr."en verificarExpr2<br>";
 			die();
 		}
 
-		
+		$operando2="";
+		$ope="";
 	}
-
 ////verificar expresión tipo ent o caracter
 
 	function verificarExprEnt($varCons)
@@ -506,7 +601,8 @@ function verificarlim2($varCons)
 		$idVarEA=$row4['id_arreglo'];
 		echo "<br>";
 		echo $tipovarE2." variable  tipovarE2 de la consulta arreglos<br>";
-
+		$operacion=$valorExpr;
+		//eval("\$valorExpr2=$operacion;");
 		
 		if($tipovarE==$ent || $tipovarE2==$ent) //si se encuentran resultados
 		{	
@@ -515,11 +611,13 @@ function verificarlim2($varCons)
 			echo "<br>".$varExpr."-->varExpr if  <br>";
 			echo "<br>".$tipovarE."-->tipovarE if  <br>";
 			echo "<br>Ejecutar gráfico función a realizar <br>";
-			echo "<pre>".$valorExpr."</pre>";
-			$updatevalorcons ="UPDATE constantesactual SET valora='".$valorExpr."' WHERE id_constante='".$idVarEC."'";
-			$result4=$con->query($updatevalorcons);
-			
-			
+			//if($ope=="+" || $ope=="-" || $ope=="/" || $ope=="*" || $ope==$mod || $ope=="")
+			//{
+				$updatevalorcons ="UPDATE constantesactual SET valora='".$valorExpr."' WHERE id_constante='".$idVarEC."'";
+				$result4=$con->query($updatevalorcons);
+			//}
+
+			echo $ope."ope en verificarExprEnt <br><br><br>";
 			
 		}
 		else{
@@ -528,6 +626,10 @@ function verificarlim2($varCons)
 			echo "<br>Error Semántico. La variable ".$varCons." es de tipo entero y ".$varExpr." no lo es en VerificarExprEnt<br>";
 			die();
 		}
+
+		$operando2="";
+		$ope="";
+		//$operando1="";
 		
 	}
 
@@ -542,6 +644,7 @@ function verificarlim2($varCons)
 		$result3=$con->query($selectvarExp);
 		$row3=mysqli_fetch_assoc($result3);
 		$tipovarE=$row3['tipo'];
+		$idVarEC=$row3['id_constante'];
 		echo "<br>";
 		echo $tipovarE." variable tipovarE de la consulta constantes<br>";
 
@@ -557,11 +660,16 @@ function verificarlim2($varCons)
 		{	
 
 			
-			
+			echo "<br>".$valorExpr."aqui es el valorExpr de verificarExprCar en constantes<br><br><br>";
 			echo "<br>".$varExpr."-->varExpr if  <br>";
 			echo "<br>".$tipovarE."-->tipovarE if  <br>";
-			echo "<br>Ejecutar gráfico función a realizar <br>";
-			
+			echo "<br>Ejecutar gráfico función a realizar función verificarExprCar constantes<br>";
+			//if($ope=="+" || $ope=="-" || $ope=="/" || $ope=="*" || $ope==$mod || $ope=="")
+			//{
+				$updatevalorconsC ="UPDATE constantesactual SET valora='".addslashes($valorExpr)."' WHERE id_constante='".$idVarEC."'";
+				$result4=$con->query($updatevalorconsC);
+			//}
+			echo $ope."ope en verificarExprCar <br><br><br>";
 		}
 		else{
 			echo "<br>".$varExpr."-->varExpr else  <br>";
@@ -569,6 +677,9 @@ function verificarlim2($varCons)
 			echo "<br>Error Semántico. La variable ".$varCons." es de tipo caracter y ".$varExpr." no lo es en VerificarExprCar<br>";
 			die();
 		}
+		$operando2="";
+		$ope="";
+		//$operando1="";
 	}
 
 
@@ -674,7 +785,9 @@ function verificarlim2($varCons)
 		{
 			
 			//ArrConsEnt($varCons,$arrEnt);
-
+			$valorExpr=$operando1.$ope.$operando2;
+			echo $valorExpr."valorExpr en CONSTANTE2 <br><br><br>";
+			echo $operando1."operando1 en CONSTANTE2 <br><br><br>";
 			$valor=$Tokens[$c3];
 			$varCons=$Tokens[$c3];
 			verificarExprEnt($varCons);
@@ -684,6 +797,7 @@ function verificarlim2($varCons)
 		}
 		else if($preanalisis==$c)
 		{	
+			$valorExpr=$operando1.$ope.$operando2;
 			$valor=$Tokens[$c3];
 			$varCons=$Tokens[$c3];
 			verificarExprCar($varCons);
@@ -844,7 +958,12 @@ function verificarlim2($varCons)
 			verificar($varCons);
 			emparejar($id); ARR(); emparejar($igual);
 			$operando1=$Tokens[$c3];
-			 OP2(); EXPR2(); emparejar($puntoycoma); INST();
+			 OP2(); EXPR2(); emparejar($puntoycoma); 
+			$operando2="";
+			$ope="";
+			$operando1="";
+
+			 INST();
 		}
 		
 		else {
@@ -858,13 +977,15 @@ function verificarlim2($varCons)
 		
 		if ($preanalisis== $suma ||  $preanalisis== $resta ||  $preanalisis== $division ||  $preanalisis== $multi ||  $preanalisis== $mod) {
 			
-			$ope=$Tokens[$c3];
+			
 			OP();   
-			$operando2=$Tokens[$c3]; 
-			OP2();
+			OP3();
 		}
 		elseif ($preanalisis== $puntoycoma) {
 			//cadena vacia
+			$ope="";
+			$operando2="";
+
 		}
 		else {
 			echo "->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis."esperaba: suma, resta, división, multiplicación o ; ";
@@ -876,22 +997,27 @@ function verificarlim2($varCons)
 
 		if($preanalisis==$mod)
 		{
+			$ope=$Tokens[$c3];
 			emparejar($mod);
 		}
 		else if($preanalisis==$suma)
 		{
+			$ope=$Tokens[$c3];
 			emparejar($suma);
 		}
 		else if($preanalisis==$resta)
 		{	
+			$ope=$Tokens[$c3];
 			emparejar($resta);
 		}
 		else if($preanalisis==$division)
 		{
+			$ope=$Tokens[$c3];
 			emparejar($division);
 		}
 		else if($preanalisis==$multi)
 		{
+			$ope=$Tokens[$c3];
 			emparejar($multi);
 		}
 		else
@@ -926,14 +1052,42 @@ function verificarlim2($varCons)
 
 		if($preanalisis==$ent||$preanalisis==$c)
 		{
-			$valorExpr=$operando1.$operador.$operando2;
-
+			
+			
 			CONSTANTE2();
 		}
 		else if($preanalisis==$id)
 		{
 			$varCons=$Tokens[$c3];
 			$valorExpr=$Tokens[$c3];
+			$operando1=$Tokens[$c3];
+			verificarExpr2($varCons);//verificar exp
+
+			emparejar($id); ARR();
+		}
+		else
+		{
+			echo "<br>->Error Sintactico en la linea: ".$NumLinea[$c3]." token-> " .$preanalisis." esperaba entero, caracter o id<br>";
+		}
+
+	}
+
+	function OP3()
+	{
+			require('globales.php');
+
+		if($preanalisis==$ent||$preanalisis==$c)
+		{
+			
+			$operando2=$Tokens[$c3];
+			CONSTANTE2();
+		}
+		else if($preanalisis==$id)
+		{
+			$varCons=$Tokens[$c3];
+			//$valorExpr=$Tokens[$c3];
+			//$valorExpr=$operando1.$ope.$operando2;
+			$operando2=$Tokens[$c3];
 			verificarExpr($varCons);//verificar exp
 			emparejar($id); ARR();
 		}
@@ -1074,7 +1228,7 @@ function verificarlim2($varCons)
 		if($preanalisis == $ent || $preanalisis == $c || $preanalisis == $id)
 		{
 			$varExpr= $Tokens[$c3];
-			OP2(); SR(); OP2();
+			OP3(); SR(); OP3();
 		}
 		else
 		{

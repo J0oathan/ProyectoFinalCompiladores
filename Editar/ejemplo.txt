@@ -1,14 +1,51 @@
 programA pares
-     constantes
+constantes
+car='0'
+limite='0'
 lim=0
+par=0
+var=0
+impar=0
+valorFinal=0
+valorFinl=0
+final=0
+figura=0
 
 arreglos valores={534, 789, 212, 6, 8}
+     datos={'n','9','0','9'}
+	inicio 
+car='2'+'k';
+    lee(car);
+limite='0';
+datos[1]='34';
 
-inicio
-lim=5+3;
-
-
+	si (car=='p') entonces
+para var=lim hasta 0 paso -1 hacer
+par=valores[var]mod 2;si (par!=10) entonces
+valores[var]=valores[var]+1;
+     fin
+ fin
+	sino	
+si (limite=='3') entonces para var=lim hasta 0 paso -1 hacer
+impar=valores[var]mod 2;
+si (par==0) entonces
+		valores[var]=valores[var]+1;
 fin
+fin
+
+
+sino
+Escribe('0');
+fin
+si (datos[6]=='23') entonces lee(figura); fin
+valorFinal=final+445;
+valorFinl=45/final;
+car='2'+'k';
+fin
+fin
+
+
+
 
 
 
