@@ -214,7 +214,8 @@ $w=0;
 echo "<h5>Arreglos enteros <span class='badge badge-secondary'>$ContadorAI</span></h5>";
 //echo "<br> contador $ContadorAI y q vale $q <br>";
 while($q<$ContadorAI){
-$A="SELECT * FROM arreglos t1 INNER JOIN valoresa t2 ON t1.id_arreglo=".$GuardaIdAI[$q]." AND t2.id_arreglo=".$GuardaIdAI[$q]."";
+//$A="SELECT * FROM arreglos t1 INNER JOIN valoresa t2 ON t1.id_arreglo=".$GuardaIdAI[$q]." AND t2.id_arreglo=".$GuardaIdAI[$q]."";
+$A="SELECT * FROM arreglos a INNER JOIN valoresa va on a.id_arreglo=va.id_arreglo INNER JOIN valoraactual vaa on va.id_valoresA=vaa.id_valoresA where a.id_arreglo=".$GuardaIdAI[$q]."";
 //echo "<br>$A";
 $inner1=$con->query($A);
  ?>
@@ -233,7 +234,7 @@ $inner1=$con->query($A);
 			<?php 
 			while($row=mysqli_fetch_assoc($inner1))
 			{ 
-				echo "<td>".$row['valor']."</td>";
+				echo "<td>".$row['valora']."</td>";
 				
 			}
 			 ?>
@@ -251,7 +252,8 @@ $inner1=$con->query($A);
 echo "<h5>Arreglos caracteres <span class='badge badge-secondary'>$ContadorAC</span></h5>";
 //echo "<br> contador $ContadorAI y q vale $q <br>";
 while($w<$ContadorAC){
-$A="SELECT * FROM arreglos t1 INNER JOIN valoresa t2 ON t1.id_arreglo=".$GuardaIdAC[$w]." AND t2.id_arreglo=".$GuardaIdAC[$w]."";
+//$A="SELECT * FROM arreglos t1 INNER JOIN valoresa t2 ON t1.id_arreglo=".$GuardaIdAC[$w]." AND t2.id_arreglo=".$GuardaIdAC[$w]."";
+$A="SELECT * FROM arreglos a INNER JOIN valoresa va on a.id_arreglo=va.id_arreglo INNER JOIN valoraactual vaa on va.id_valoresA=vaa.id_valoresA where a.id_arreglo=".$GuardaIdAC[$w]."";
 //echo "<br>$A";
 $inner1=$con->query($A);
  ?>
@@ -270,7 +272,7 @@ $inner1=$con->query($A);
 			<?php 
 			while($row=mysqli_fetch_assoc($inner1))
 			{ 
-				echo "<td>".$row['valor']."</td>";
+				echo "<td>".$row['valora']."</td>";
 				
 			}
 			 ?>
